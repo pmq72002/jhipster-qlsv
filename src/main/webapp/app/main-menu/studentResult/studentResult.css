@@ -1,0 +1,58 @@
+.group-student-result {
+  width: 43.9%;
+  background: white;
+  border-radius: 4px;
+}
+.header-student-result {
+  display: flex;
+  padding: 1rem;
+  background: #e2e2e2;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5 {
+  flex: 1;
+  text-align: center;
+}
+
+.body-student-result {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.row-student-result {
+  display: flex;
+  align-items: center;
+}
+.pass {
+  color: green;
+  font-size: 25;
+  font-weight: bold;
+}
+
+.fail {
+  color: red;
+  font-weight: bold;
+  font-size: 25;
+}
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: rgb(162, 162, 173);
+  padding: 0.2rem 0.2rem;
+  width: 100px;
+  border-radius: 10px;
+}

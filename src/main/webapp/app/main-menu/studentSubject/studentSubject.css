@@ -1,0 +1,49 @@
+.group-student-subject {
+  width: 27%;
+  background: white;
+  border-radius: 4px;
+}
+.header-student-subject {
+  display: flex;
+  padding: 1rem;
+  background: #e2e2e2;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.col-1 {
+  flex: 1;
+  text-align: center;
+}
+
+.col-2 {
+  flex: 1;
+  text-align: center;
+}
+
+.body-student-subject {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.row-student-subject {
+  display: flex;
+  align-items: center;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: rgb(162, 162, 173);
+  padding: 0.2rem 0.2rem;
+  width: 100px;
+  border-radius: 10px;
+}

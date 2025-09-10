@@ -1,23 +1,30 @@
-/* ==========================================================================
-Main page styles
-========================================================================== */
-
-.hipster {
-  display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
-  background-size: contain;
+.group-header {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgb(0, 0, 0, 0.15) 1px 1px 10px 0px;
+  padding: 0.5rem 2rem;
+  background: linear-gradient(to right, #0b110b, #283328);
+}
+.header-first {
+  display: flex;
+  align-items: center;
+}
+.header-show-list {
+  font-size: 24px;
+  padding-left: 5rem;
+}
+.main-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #283328, #0b110b);
+  color: white;
+  height: 50px;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (-moz-min-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .hipster {
-    background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
-    background-size: contain;
-  }
+a {
+  text-decoration: none;
+  color: inherit;
 }

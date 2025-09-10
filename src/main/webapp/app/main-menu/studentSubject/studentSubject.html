@@ -1,0 +1,15 @@
+<div class="group-student-subject">
+  <div class="header-student-subject">
+    <div class="col-1">Môn học</div>
+    <div class="col-2">Số tiết</div>
+  </div>
+
+  <div class="body-student-subject">
+    @for (subject of studentSubject; track subject) {
+    <div class="row-student-subject">
+      <div class="col-1">{{ subject.subName }}</div>
+      <div class="col-2">{{ subject.subNum}}</div>
+    </div>
+    }
+  </div>
+</div>

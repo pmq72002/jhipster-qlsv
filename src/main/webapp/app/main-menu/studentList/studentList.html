@@ -1,0 +1,20 @@
+<div class="group-student-list">
+  <h2>Danh sách sinh viên</h2>
+  <div class="header-student-list">
+    <div class="col-1">Mã SV</div>
+    <div class="col-2">Tên SV</div>
+    <div class="col-3">Xem thông tin</div>
+  </div>
+
+  <div class="body-student-list">
+    @for (student of students; track student) {
+    <div class="row-student-list">
+      <div class="col-1">{{ student.stuCode }}</div>
+      <div class="col-2">{{ student.stuName}}</div>
+      <div class="col-3">
+        <a [routerLink]="['/studentInfo', student.stuCode]">Xem</a>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,82 @@
+.group-student-score {
+  width: 35.5%;
+  background: white;
+  border-radius: 4px;
+}
+.header-student-score {
+  display: flex;
+  padding: 1rem;
+  background: #e2e2e2;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.col-1 {
+  flex: 1;
+  text-align: center;
+}
+
+.col-2 {
+  flex: 1;
+  text-align: center;
+}
+
+.col-3 {
+  flex: 1;
+  text-align: center;
+}
+.col-4 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.body-student-score {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.row-student-score {
+  display: flex;
+  align-items: center;
+}
+
+.edit-student-score {
+  background: blue;
+  border-radius: 10px;
+  padding: 0.2rem 0rem;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: rgb(162, 162, 173);
+  padding: 0.2rem 0.2rem;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.input-score {
+  font-size: 20px;
+  padding: 0.2rem 0.2rem;
+}
+
+.btn-update-score {
+  background: green;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 0.6rem 0.4rem;
+  margin-left: 10px;
+  color: white;
+}

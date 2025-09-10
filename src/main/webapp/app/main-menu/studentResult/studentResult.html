@@ -1,0 +1,29 @@
+<div class="group-student-result">
+  <div class="header-student-result">
+    <div class="col-1">Môn học</div>
+    <div class="col-2">Điểm QT</div>
+    <div class="col-3">Điểm TP</div>
+    <div class="col-4">Điểm tổng kết</div>
+    <div class="col-5">Kết quả</div>
+  </div>
+
+  <div class="body-student-result">
+    @for (result of studentScore; track result) {
+    <div class="row-student-result">
+      <div class="col-1">{{ result.subName }}</div>
+      <div class="col-2">{{ result.processPoint }}</div>
+      <div class="col-3">{{ result.componentPoint }}</div>
+      <div class="col-4">{{ result.summaryScore }}</div>
+      <div
+        class="col-5"
+        [ngClass]="{
+              'pass': result.passSub === 'Đỗ',
+              'fail': result.passSub === 'Trượt',
+            }"
+      >
+        {{ result.passSub }}
+      </div>
+    </div>
+    }
+  </div>
+</div>
