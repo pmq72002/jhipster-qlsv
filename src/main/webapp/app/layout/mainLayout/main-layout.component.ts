@@ -3,8 +3,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'jhi-app',
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  templateUrl: './main-layout.component.html',
+  styleUrl: './main-layout.component.css',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
-export default class AppComponent {}
+export default class MainLayoutComponent {}

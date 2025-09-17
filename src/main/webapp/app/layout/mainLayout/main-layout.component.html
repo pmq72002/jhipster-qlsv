@@ -1,0 +1,29 @@
+<div class="layout">
+  <!-- Header -->
+  <header class="group-header">
+    <div class="header-first">
+      <h1 class="header-title">
+        <a [routerLink]="['/home']">QLSV</a>
+      </h1>
+    </div>
+    <div class="group-navigation">
+      <div>CHEZ</div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav class="nav">
+      <a [routerLink]="['/home']" routerLinkActive="active">Trang chủ</a>
+      <a [routerLink]="['/studentList']" routerLinkActive="active">Danh sách sinh viên</a>
+      <a [routerLink]="['/studentInfo/:stuCode']" routerLinkActive="active">Thêm sinh viên</a>
+      <a [routerLink]="['/studentInfo/:stuCode']" routerLinkActive="active">Thông tin</a>
+      <a [routerLink]="['/:stuCode/score']" routerLinkActive="active">Bảng điểm</a>
+    </nav>
+  </aside>
+
+  <!-- Nội dung động -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

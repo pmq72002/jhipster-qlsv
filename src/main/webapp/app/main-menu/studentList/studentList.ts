@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StudentLists } from 'app/shared/types/student-list';
-import HomeComponent from 'app/home/home.component';
+import HomeComponent from 'app/home/home';
 
 @Component({
   selector: 'app-student-list',

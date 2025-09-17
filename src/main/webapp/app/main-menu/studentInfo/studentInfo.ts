@@ -6,7 +6,7 @@ import { studentInfo } from 'app/shared/types/student-info';
 import { StudentSubject } from '../studentSubject/studentSubject';
 import { StudentScore } from '../studentScore/studentScore';
 import { StudentResult } from '../studentResult/studentResult';
-import HomeComponent from 'app/home/home.component';
+import HomeComponent from 'app/home/home';
 
 @Component({
   selector: 'app-student-info',

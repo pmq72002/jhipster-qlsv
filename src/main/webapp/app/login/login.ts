@@ -32,6 +32,7 @@ export class LoginComponent {
         next: res => {
           const token = res.result.token;
           localStorage.setItem('authenticationToken', token);
+          sessionStorage.setItem('authenticationToken', token);
           console.log('✅ Login success:', token);
           this.error = '';
 
