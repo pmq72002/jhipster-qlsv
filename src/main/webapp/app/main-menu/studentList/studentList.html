@@ -1,3 +1,4 @@
+<jhi-home></jhi-home>
 <div class="group-student-list">
   <h2>Danh sách sinh viên</h2>
   <div class="header-student-list">
@@ -16,5 +17,15 @@
       </div>
     </div>
     }
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="prev()" [disabled]="page === 1">«</button>
+
+    @for (p of pages(); track p) {
+    <button (click)="goTo(p)" [class.active]="page === p">{{ p }}</button>
+    }
+
+    <button (click)="next()" [disabled]="page === totalPages">»</button>
   </div>
 </div>

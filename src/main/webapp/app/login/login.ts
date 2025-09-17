@@ -1,0 +1,46 @@
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthJwtService } from 'app/core/auth/auth-jwt.service';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './login.html',
+  styleUrl: './login.css',
+})
+export class LoginComponent {
+  stuCode: string = '';
+  password: string = '';
+  error: string = '';
+
+  constructor(
+    private authService: AuthJwtService,
+    private router: Router,
+  ) {}
+
+  login() {
+    this.authService
+      .login({
+        stuCode: this.stuCode,
+        password: this.password,
+        rememberMe: false,
+      })
+      .subscribe({
+        next: res => {
+          const token = res.result.token;
+          localStorage.setItem('authenticationToken', token);
+          console.log('✅ Login success:', token);
+          this.error = '';
+
+          this.router.navigate(['/home']);
+        },
+        error: err => {
+          console.error('❌ Login failed:', err);
+          this.error = 'Sai mã sinh viên hoặc password!';
+        },
+      });
+  }
+}

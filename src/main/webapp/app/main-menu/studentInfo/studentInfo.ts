@@ -6,11 +6,12 @@ import { studentInfo } from 'app/shared/types/student-info';
 import { StudentSubject } from '../studentSubject/studentSubject';
 import { StudentScore } from '../studentScore/studentScore';
 import { StudentResult } from '../studentResult/studentResult';
+import HomeComponent from 'app/home/home.component';
 
 @Component({
   selector: 'app-student-info',
   standalone: true,
-  imports: [NgIf, StudentSubject, StudentScore, StudentResult],
+  imports: [NgIf, StudentSubject, StudentScore, StudentResult, HomeComponent],
   templateUrl: './studentInfo.html',
   styleUrl: './studentInfo.css',
 })
