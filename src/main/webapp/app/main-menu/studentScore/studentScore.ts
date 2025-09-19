@@ -59,6 +59,7 @@ export class StudentScore implements OnInit {
       },
     });
   }
+  stuName: string = '';
   loadStudentScores(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any>(`api/student/${stuCode}/score`).subscribe({
@@ -76,8 +77,21 @@ export class StudentScore implements OnInit {
         this.loading = false;
       },
     });
+    this.http.get<any>(`api/student/${stuCode}`).subscribe({
+      next: res => {
+        this.stuName = res.stuName;
+      },
+      error: err => {
+        console.error('❌ Lỗi tải tên sinh viên:', err);
+      },
+    });
   }
+  roles: string[] = [];
   ngOnInit(): void {
+    const storedRoles = localStorage.getItem('roles');
+    if (storedRoles) {
+      this.roles = JSON.parse(storedRoles);
+    }
     this.loadStudentScores();
   }
 }

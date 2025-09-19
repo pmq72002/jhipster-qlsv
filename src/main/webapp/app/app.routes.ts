@@ -4,8 +4,11 @@ import { StudentInfo } from './main-menu/studentInfo/studentInfo';
 import { LoginComponent } from './login/login';
 import HomeComponent from './home/home';
 import AuthLayoutComponent from './layout/authLayout/auth-layout.component';
-import AppComponent from './app.component';
 import MainLayoutComponent from './layout/mainLayout/main-layout.component';
+import { StudentCreateComponent } from './main-menu/studentCreate/studentCreat';
+import { StudentSubject } from './main-menu/studentSubject/studentSubject';
+import { StudentResult } from './main-menu/studentResult/studentResult';
+import { StudentScore } from './main-menu/studentScore/studentScore';
 
 const routes: Routes = [
   {
@@ -38,6 +41,22 @@ const routes: Routes = [
       {
         path: 'studentInfo/:stuCode',
         component: StudentInfo,
+      },
+      {
+        path: 'create',
+        component: StudentCreateComponent,
+      },
+      {
+        path: ':stuCode/subject',
+        component: StudentSubject,
+      },
+      {
+        path: ':stuCode/score',
+        component: StudentScore,
+      },
+      {
+        path: ':stuCode/result',
+        component: StudentResult,
       },
     ],
   },

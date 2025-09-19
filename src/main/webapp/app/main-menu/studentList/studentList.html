@@ -11,8 +11,10 @@
     <div class="row-student-list">
       <div class="col-1">{{ student.stuCode }}</div>
       <div class="col-2">{{ student.stuName}}</div>
-      <div class="col-3">
-        <a [routerLink]="['/studentInfo', student.stuCode]">Xem</a>
+      <div class="col-3" [ngSwitch]="viewMode">
+        <a [routerLink]="['/studentInfo', student.stuCode]" *ngSwitchCase="'info'">Xem thông tin</a>
+        <a [routerLink]="['/'+student.stuCode+'/subject']" *ngSwitchCase="'subject'">Xem môn học</a>
+        <a [routerLink]="['/'+student.stuCode+'/score']" *ngSwitchCase="'score'">Xem điểm</a>
       </div>
     </div>
     }

@@ -1,17 +1,18 @@
+import { NgSwitch, NgSwitchCase } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentLists } from 'app/shared/types/student-list';
-import HomeComponent from 'app/home/home';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [RouterLink, HomeComponent],
+  imports: [RouterLink, NgSwitch, NgSwitchCase],
   templateUrl: './studentList.html',
   styleUrl: './studentList.css',
 })
 export class StudentList implements OnInit {
+  viewMode: 'info' | 'subject' | 'score' = 'info';
   allStudents: StudentLists[] = [];
   students: StudentLists[] = [];
   loading = true;
@@ -20,9 +21,16 @@ export class StudentList implements OnInit {
   page = 1;
   size = 11;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.viewMode = params['view'] || 'info';
+    });
+
     this.http.get<any>('api/student/list').subscribe({
       next: res => {
         this.allStudents = res.map((item: { stuCode: any; stuName: any }) => ({

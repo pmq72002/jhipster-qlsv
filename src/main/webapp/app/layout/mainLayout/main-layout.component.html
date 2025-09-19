@@ -15,10 +15,40 @@
   <aside class="sidebar">
     <nav class="nav">
       <a [routerLink]="['/home']" routerLinkActive="active">Trang chủ</a>
-      <a [routerLink]="['/studentList']" routerLinkActive="active">Danh sách sinh viên</a>
-      <a [routerLink]="['/studentInfo/:stuCode']" routerLinkActive="active">Thêm sinh viên</a>
-      <a [routerLink]="['/studentInfo/:stuCode']" routerLinkActive="active">Thông tin</a>
-      <a [routerLink]="['/:stuCode/score']" routerLinkActive="active">Bảng điểm</a>
+      <a
+        [routerLink]="['/studentList']"
+        [queryParams]="{ view: 'info' }"
+        routerLinkActive="active"
+        *ngIf="roles.includes('ADMIN')"
+        (click)="setViewMode('info')"
+      >
+        Danh sách sinh viên</a
+      >
+      <a [routerLink]="['/create']" routerLinkActive="active" *ngIf="roles.includes('ADMIN')">Thêm sinh viên</a>
+      <a [routerLink]="['/studentInfo', stuCode]" routerLinkActive="active" *ngIf="roles.includes('USER')">Thông tin cá nhân</a>
+
+      <a
+        [routerLink]="['/studentList']"
+        [queryParams]="{ view: 'subject' }"
+        routerLinkActive="active"
+        (click)="setViewMode('subject')"
+        *ngIf="roles.includes('ADMIN')"
+      >
+        Môn học
+      </a>
+
+      <a
+        [routerLink]="['/studentList']"
+        [queryParams]="{ view: 'score' }"
+        routerLinkActive="active"
+        (click)="setViewMode('score')"
+        *ngIf="roles.includes('ADMIN')"
+      >
+        Bảng điểm
+      </a>
+
+      <a [routerLink]="['/' + stuCode + '/subject']" routerLinkActive="active" *ngIf="roles.includes('USER')"> Môn học</a>
+      <a [routerLink]="['/' + stuCode + '/score']" routerLinkActive="active" *ngIf="roles.includes('USER')"> Bảng điểm</a>
     </nav>
   </aside>
 

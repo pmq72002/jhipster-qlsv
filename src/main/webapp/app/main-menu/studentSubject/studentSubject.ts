@@ -19,7 +19,7 @@ export class StudentSubject implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
   ) {}
-
+  stuName: string = '';
   ngOnInit(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any>(`api/student/${stuCode}/subject`).subscribe({
@@ -33,6 +33,14 @@ export class StudentSubject implements OnInit {
         console.error('❌ Lỗi kết nối BE:', err);
         this.error = 'Không thể tải dữ liệu sinh viên';
         this.loading = false;
+      },
+    });
+    this.http.get<any>(`api/student/${stuCode}`).subscribe({
+      next: res => {
+        this.stuName = res.stuName;
+      },
+      error: err => {
+        console.error('❌ Lỗi tải tên sinh viên:', err);
       },
     });
   }

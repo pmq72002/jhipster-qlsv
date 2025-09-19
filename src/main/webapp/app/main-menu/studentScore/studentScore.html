@@ -1,9 +1,12 @@
 <div class="group-student-score">
+  <div class="text-student-score">
+    <div>Bảng điểm sinh viên: {{stuName}}</div>
+  </div>
   <div class="header-student-score">
     <div class="col-1">Môn học</div>
     <div class="col-2">Điểm QT</div>
     <div class="col-3">Điểm TP</div>
-    <div class="col-3">ACTION</div>
+    <div *ngIf="roles.includes('ADMIN')" class="col-3">ACTION</div>
   </div>
 
   <div class="body-student-score">
@@ -12,7 +15,7 @@
       <div class="col-1">{{ score.subName }}</div>
       <div class="col-2">{{ score.processPoint}}</div>
       <div class="col-3">{{ score.componentPoint}}</div>
-      <div class="col-4" (click)="handleShowEditScore(score)" (keydown.enter)="handleShowEditScore(score)">
+      <div *ngIf="roles.includes('ADMIN')" class="col-4" (click)="handleShowEditScore(score)" (keydown.enter)="handleShowEditScore(score)">
         <div class="edit-student-score">Nhập điểm</div>
       </div>
     </div>
@@ -31,6 +34,5 @@
     Điểm thành phần:
     <input type="number" [(ngModel)]="componentPoint" min="0" max="10" />
   </label>
-
   <button (click)="onUpdateScore()" class="btn-update-score">Nhập điểm</button>
 </div>

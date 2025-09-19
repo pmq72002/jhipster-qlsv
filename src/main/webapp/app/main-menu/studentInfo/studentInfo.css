@@ -1,84 +1,70 @@
-.group-student-info {
-  width: 100%;
-  background: white;
-  padding: 1rem;
-  margin: auto;
-  border-radius: 4px;
-}
-.header-student-info {
+.group-student {
   display: flex;
+  gap: 30px;
+  width: 100%;
+  align-items: stretch;
+  margin-left: 100px;
+}
+
+.group-student-info {
+  width: 40%;
+  background: rgb(182, 178, 178);
   padding: 1rem;
-  background: #e2e2e2;
-  text-transform: uppercase;
-  font-weight: 600;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-student-info {
+  font-size: 26px;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.group-student-actions {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h2 {
+  font-weight: 500;
+  text-align: center;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  padding: 8px 0;
   font-size: 18px;
 }
 
-.col-1,
-.col-3,
-.col-4,
-.col-5,
-.col-6 {
+.info-row div:first-child {
+  font-weight: bold;
+}
+
+.seeSubject,
+.seeScore {
   flex: 1;
+  background: rebeccapurple;
+  color: white;
+  border-radius: 6px;
   text-align: center;
-}
-
-.col-2 {
-  flex: 1.5;
-  text-align: center;
-}
-.col-7 {
-  flex: 2.5;
-  text-align: center;
-}
-
-.body-student-info {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  margin-top: 1rem;
-  padding: 1rem;
-  font-weight: 500;
-  font-size: 16px;
-  justify-content: center;
-}
-
-.row-student-info {
+  cursor: pointer;
+  transition: 0.2s;
   display: flex;
   align-items: center;
-}
-
-.group-student-info-act {
-  display: flex;
   justify-content: center;
 }
 
-a {
-  text-decoration: none;
-  color: white;
+.seeSubject:hover,
+.seeScore:hover {
+  background: indigo;
 }
 
-.student-info-subject {
-  background: blue;
-  border-radius: 10px;
-  padding: 0.5rem 0.5rem;
-  margin: 0.5rem;
-  color: white;
-  cursor: pointer;
-}
-.student-info-score {
-  background: green;
-  border-radius: 10px;
-  margin: 0.5rem;
-  padding: 0.5rem 0.5rem;
-  color: white;
-  cursor: pointer;
-}
-.student-info-result {
-  border-radius: 10px;
-  padding: 0.5rem 0.5rem;
-  margin: 0.5rem;
-  background: red;
-  color: white;
-  cursor: pointer;
+.group-action {
+  margin: 20px 100px;
 }

@@ -6,12 +6,11 @@ import { studentInfo } from 'app/shared/types/student-info';
 import { StudentSubject } from '../studentSubject/studentSubject';
 import { StudentScore } from '../studentScore/studentScore';
 import { StudentResult } from '../studentResult/studentResult';
-import HomeComponent from 'app/home/home';
 
 @Component({
   selector: 'app-student-info',
   standalone: true,
-  imports: [NgIf, StudentSubject, StudentScore, StudentResult, HomeComponent],
+  imports: [NgIf, StudentSubject, StudentScore, StudentResult],
   templateUrl: './studentInfo.html',
   styleUrl: './studentInfo.css',
 })
@@ -42,6 +41,8 @@ export class StudentInfo implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
   ) {}
+  roles: string[] = [];
+  stuCode: string = '';
 
   ngOnInit(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');

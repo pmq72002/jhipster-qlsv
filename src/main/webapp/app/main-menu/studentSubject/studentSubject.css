@@ -12,6 +12,12 @@
   font-size: 18px;
 }
 
+.text-student-subject {
+  padding: 2rem 0rem;
+  font-weight: bold;
+  font-size: 28px;
+}
+
 .col-1 {
   flex: 1;
   text-align: center;

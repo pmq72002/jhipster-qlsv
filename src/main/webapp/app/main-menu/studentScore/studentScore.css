@@ -3,6 +3,11 @@
   background: white;
   border-radius: 4px;
 }
+.text-student-score {
+  padding: 2rem 0rem;
+  font-weight: bold;
+  font-size: 28px;
+}
 .header-student-score {
   display: flex;
   padding: 1rem;

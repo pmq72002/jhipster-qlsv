@@ -16,13 +16,11 @@
 
 .col-1 {
   flex: 1;
-
   text-align: center;
 }
 
 .col-2 {
   flex: 1;
-
   text-align: center;
 }
 
@@ -53,7 +51,8 @@ a {
   color: white;
   background: rgb(162, 162, 173);
   padding: 0.2rem 0.2rem;
-  width: 100px;
+  width: 130px;
+  height: 35px;
   border-radius: 10px;
 }
 .pagination-controls {

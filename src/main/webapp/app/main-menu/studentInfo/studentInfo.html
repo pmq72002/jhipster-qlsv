@@ -1,36 +1,49 @@
-<div class="group-student-info">
-  <h2>Thông tin sinh viên</h2>
-  <div class="header-student-info">
-    <div class="col-1">Mã SV</div>
-    <div class="col-2">Tên SV</div>
-    <div class="col-3">Giới tính</div>
-    <div class="col-4">Ngày sinh</div>
-    <div class="col-5">Lớp</div>
-    <div class="col-6">Khóa</div>
-    <div class="col-7">ACTION</div>
-  </div>
+<div class="group-student">
+  <div class="group-student-info">
+    <div class="text-student-info">
+      <div>Thông tin cá nhân</div>
+    </div>
 
-  <div class="body-student-info" *ngIf="studentInfo">
-    <div class="row-student-info">
-      <div class="col-1">{{ studentInfo.stuCode }}</div>
-      <div class="col-2">{{ studentInfo.stuName }}</div>
-      <div class="col-3">{{ studentInfo.gender }}</div>
-      <div class="col-4">{{ studentInfo.birth }}</div>
-      <div class="col-5">{{ studentInfo.classR }}</div>
-      <div class="col-6">{{ studentInfo.course }}</div>
-      <div class="group-student-info-act col-7">
-        <div class="student-info-subject" (click)="handleShowSubject()" (keydown.enter)="handleShowSubject()">
-          <a>Xem môn học</a>
-        </div>
-        <div class="student-info-score" (click)="handleShowScore()" (keydown.enter)="handleShowScore()">
-          <a>Xem điểm</a>
-        </div>
-        <div class="student-info-result" (click)="handleShowResult()" (keydown.enter)="handleShowResult()">
-          <a>Xem kết quả</a>
-        </div>
+    <div *ngIf="studentInfo">
+      <div class="info-row">
+        <div>Mã sinh viên</div>
+        <div>{{studentInfo.stuCode}}</div>
+      </div>
+
+      <div class="info-row">
+        <div>Họ và tên</div>
+        <div>{{studentInfo.stuName}}</div>
+      </div>
+
+      <div class="info-row">
+        <div>Giới tính</div>
+        <div>{{studentInfo.gender}}</div>
+      </div>
+
+      <div class="info-row">
+        <div>Ngày sinh</div>
+        <div>{{studentInfo.birth}}</div>
+      </div>
+
+      <div class="info-row">
+        <div>Lớp</div>
+        <div>{{studentInfo.classR}}</div>
+      </div>
+
+      <div class="info-row">
+        <div>Khóa</div>
+        <div>{{studentInfo.course}}</div>
       </div>
     </div>
   </div>
+
+  <div class="group-student-actions">
+    <div class="seeSubject" (click)="handleShowSubject()" (keydown.enter)="handleShowSubject()">Xem môn học</div>
+    <div class="seeScore" (click)="handleShowScore()" (keydown.enter)="handleShowScore()">Xem điểm</div>
+  </div>
+</div>
+
+<div class="group-action">
   <app-student-subject *ngIf="showSubject"></app-student-subject>
   <app-student-score *ngIf="showScore"></app-student-score>
   <app-student-result *ngIf="showResult"></app-student-result>
