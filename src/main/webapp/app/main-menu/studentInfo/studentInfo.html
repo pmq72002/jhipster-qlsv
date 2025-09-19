@@ -1,42 +1,49 @@
 <div class="group-student">
   <div class="group-student-info">
-    <div class="text-student-info">
-      <div>Thông tin cá nhân</div>
-    </div>
-
+    <div class="text-student-info">Thông tin cá nhân</div>
     <div *ngIf="studentInfo">
       <div class="info-row">
         <div>Mã sinh viên</div>
-        <div>{{studentInfo.stuCode}}</div>
+        <input type="text" [(ngModel)]="studentInfo.stuCode" disabled />
       </div>
 
       <div class="info-row">
         <div>Họ và tên</div>
-        <div>{{studentInfo.stuName}}</div>
+        <input type="text" [(ngModel)]="studentInfo.stuName" [disabled]="!editMode" />
       </div>
 
       <div class="info-row">
         <div>Giới tính</div>
-        <div>{{studentInfo.gender}}</div>
+        <input type="text" [(ngModel)]="studentInfo.gender" [disabled]="!editMode" />
       </div>
 
       <div class="info-row">
         <div>Ngày sinh</div>
-        <div>{{studentInfo.birth}}</div>
+        <input type="text" [(ngModel)]="studentInfo.birth" [disabled]="!editMode" />
       </div>
 
       <div class="info-row">
         <div>Lớp</div>
-        <div>{{studentInfo.classR}}</div>
+        <input type="text" [(ngModel)]="studentInfo.classR" [disabled]="!editMode" />
       </div>
 
       <div class="info-row">
         <div>Khóa</div>
-        <div>{{studentInfo.course}}</div>
+        <input type="text" [(ngModel)]="studentInfo.course" [disabled]="!editMode" />
       </div>
       <div class="actionStudent">
-        <div class="editStudent" (click)="handleShowSubject()" (keydown.enter)="handleShowSubject()">Sửa thông tin</div>
-        <div class="deleteStudent" (click)="deleteStudent(studentInfo.stuCode)" (keydown.enter)="deleteStudent(studentInfo.stuCode)">
+        <div class="editStudent" *ngIf="!editMode" (click)="editMode = true" (keydown.enter)="editMode=true">Sửa thông tin</div>
+        <div class="saveStudent" *ngIf="editMode" (click)="handleSaveStudent()" (keydown.enter)="handleSaveStudent()">Lưu</div>
+        <div class="cancelStudent" *ngIf="editMode" (click)="editMode = false" (keydown.enter)="editMode=false">Hủy bỏ</div>
+        <div class="changePassStudent" *ngIf="!changePassMode" (click)="changePassMode = true" (keydown.enter)="changePassMode=true">
+          Đổi mật khẩu
+        </div>
+        <div
+          class="deleteStudent"
+          *ngIf="!editMode"
+          (click)="deleteStudent(studentInfo.stuCode)"
+          (keydown.enter)="deleteStudent(studentInfo.stuCode)"
+        >
           Xóa sinh viên
         </div>
       </div>
@@ -44,8 +51,23 @@
   </div>
 </div>
 
-<div class="group-action">
-  <app-student-subject *ngIf="showSubject"></app-student-subject>
-  <app-student-score *ngIf="showScore"></app-student-score>
-  <app-student-result *ngIf="showResult"></app-student-result>
+<div class="group-change-password-container" *ngIf="changePassMode">
+  <div class="group-change-password">
+    <div class="info-row">
+      <div>Mật khẩu cũ</div>
+      <input type="text" [(ngModel)]="oldPassword" />
+    </div>
+    <div class="info-row">
+      <div>Mật khẩu mới</div>
+      <input type="text" [(ngModel)]="newPassword" />
+    </div>
+    <div class="info-row">
+      <div>Nhập lại mật khẩu</div>
+      <input type="text" [(ngModel)]="confirmPassword" />
+    </div>
+    <div class="actionPassword">
+      <div class="savePassword" (click)="changePassStudent()" (keydown.enter)="changePassStudent()">Lưu</div>
+      <div class="cancelPassword" (click)="changePassMode = false" (keydown.enter)="changePassMode=false">Hủy bỏ</div>
+    </div>
+  </div>
 </div>

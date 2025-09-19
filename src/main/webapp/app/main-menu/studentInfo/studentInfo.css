@@ -1,14 +1,15 @@
 .group-student {
   display: flex;
-  gap: 40px;
+  gap: 20px;
   width: 100%;
   align-items: flex-start;
   margin: 20px auto;
   padding: 10px;
+  justify-content: center;
 }
 
 .group-student-info {
-  width: 35%;
+  width: 40%;
   background: #fff;
   padding: 1.5rem;
   border-radius: 12px;
@@ -44,13 +45,18 @@
 
 .actionStudent {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 1rem;
   gap: 12px;
 }
 
 .editStudent,
-.deleteStudent {
+.deleteStudent,
+.saveStudent,
+.cancelStudent,
+.changePassStudent,
+.savePassword,
+.cancelPassword {
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
@@ -59,29 +65,73 @@
   transition: all 0.2s ease-in-out;
 }
 
-.editStudent {
+.editStudent,
+.saveStudent,
+.savePassword {
   border: 1px solid #007bff;
   color: #007bff;
   background: transparent;
 }
 
-.editStudent:hover {
+.editStudent:hover,
+.saveStudent:hover,
+.savePassword:hover {
   background: #007bff;
   color: #fff;
 }
 
-.deleteStudent {
+.deleteStudent,
+.cancelStudent,
+.cancelPassword {
   border: 1px solid #dc3545;
   color: #dc3545;
   background: transparent;
 }
 
-.deleteStudent:hover {
+.deleteStudent:hover,
+.cancelStudent:hover,
+.cancelPassword:hover {
   background: #dc3545;
+  color: #fff;
+}
+
+.changePassStudent {
+  border: 1px solid #000000;
+  color: #000000;
+  background: transparent;
+}
+.changePassStudent:hover {
+  background: #000000;
   color: #fff;
 }
 
 .group-action {
   flex: 1;
   margin: 20px auto;
+}
+
+.group-change-password-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  align-items: flex-start;
+  margin: 10px auto;
+  padding: 10px;
+  justify-content: center;
+}
+.group-change-password {
+  width: 35%;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.actionPassword {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 12px;
 }
