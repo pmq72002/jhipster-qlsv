@@ -86,19 +86,21 @@ export class StudentInfo implements OnInit {
       newPassword: this.newPassword,
       confirmPassword: this.confirmPassword,
     };
-    this.http.put<any>(`api/student/${this.studentInfo?.stuCode}/password`, payload).subscribe({
-      next: res => {
-        this.studentInfo = res.result;
-        this.changePassMode = false;
-        alert(res.message || 'Đổi mật khẩu thành công');
-      },
-      error: err => {
-        console.log('Lỗi đổi mật khẩu', err);
-        alert('Đổi mật khẩu thất bại: ' + err.error?.message);
-      },
-    });
+    if (confirm(`Bạn có chắc muốn đổi mật khẩu?`)) {
+      this.http.put<any>(`api/student/${this.studentInfo?.stuCode}/password`, payload).subscribe({
+        next: res => {
+          this.studentInfo = res.result;
+          this.changePassMode = false;
+          alert(res.message || 'Đổi mật khẩu thành công');
+          this.router.navigate(['/studentList']);
+        },
+        error: err => {
+          console.log('Lỗi đổi mật khẩu', err);
+          alert('Đổi mật khẩu thất bại: ' + err.error?.message);
+        },
+      });
+    }
   }
-
   deleteStudent(stuCode: string): void {
     if (confirm(`Bạn có chắc muốn xóa sinh viên ${stuCode}?`)) {
       this.http.delete<{ message: string }>(`api/student/${stuCode}`).subscribe({

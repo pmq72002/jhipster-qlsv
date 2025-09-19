@@ -53,7 +53,7 @@ export class LoginComponent {
         },
         error: err => {
           console.error('❌ Login failed:', err);
-          this.error = 'Sai mã sinh viên hoặc password!';
+          this.error = 'Sai mã sinh viên hoặc mật khẩu!';
         },
       });
   }

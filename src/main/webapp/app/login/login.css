@@ -42,7 +42,8 @@ html {
   background-color: #da960f;
 }
 
-.error {
+.errorLog {
   margin-top: 10px;
   color: red;
+  font-size: 16px;
 }

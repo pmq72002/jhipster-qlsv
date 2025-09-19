@@ -35,7 +35,12 @@
         <div class="editStudent" *ngIf="!editMode" (click)="editMode = true" (keydown.enter)="editMode=true">Sửa thông tin</div>
         <div class="saveStudent" *ngIf="editMode" (click)="handleSaveStudent()" (keydown.enter)="handleSaveStudent()">Lưu</div>
         <div class="cancelStudent" *ngIf="editMode" (click)="editMode = false" (keydown.enter)="editMode=false">Hủy bỏ</div>
-        <div class="changePassStudent" *ngIf="!changePassMode" (click)="changePassMode = true" (keydown.enter)="changePassMode=true">
+        <div
+          class="changePassStudent"
+          *ngIf="!changePassMode && !editMode"
+          (click)="changePassMode = true"
+          (keydown.enter)="changePassMode=true"
+        >
           Đổi mật khẩu
         </div>
         <div
