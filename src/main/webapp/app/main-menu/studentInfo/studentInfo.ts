@@ -64,4 +64,18 @@ export class StudentInfo implements OnInit {
       },
     });
   }
+  deleteStudent(stuCode: string): void {
+    if (confirm(`Bạn có chắc muốn xóa sinh viên ${stuCode}?`)) {
+      this.http.delete<{ message: string }>(`api/student/${stuCode}`).subscribe({
+        next: res => {
+          console.log('✅ Xóa thành công:', res.message);
+          alert(res.message);
+        },
+        error: err => {
+          console.error('❌ Lỗi xóa sinh viên:', err);
+          alert('Xóa sinh viên thất bại!');
+        },
+      });
+    }
+  }
 }

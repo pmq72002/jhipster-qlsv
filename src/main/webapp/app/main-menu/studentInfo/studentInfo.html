@@ -34,12 +34,13 @@
         <div>Khóa</div>
         <div>{{studentInfo.course}}</div>
       </div>
+      <div class="actionStudent">
+        <div class="editStudent" (click)="handleShowSubject()" (keydown.enter)="handleShowSubject()">Sửa thông tin</div>
+        <div class="deleteStudent" (click)="deleteStudent(studentInfo.stuCode)" (keydown.enter)="deleteStudent(studentInfo.stuCode)">
+          Xóa sinh viên
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="group-student-actions">
-    <div class="seeSubject" (click)="handleShowSubject()" (keydown.enter)="handleShowSubject()">Xem môn học</div>
-    <div class="seeScore" (click)="handleShowScore()" (keydown.enter)="handleShowScore()">Xem điểm</div>
   </div>
 </div>
 

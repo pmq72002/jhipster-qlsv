@@ -7,7 +7,7 @@
   padding: 10px;
 }
 
-.group-student-info {
+.group-student-create {
   width: 35%;
   background: #fff;
   padding: 1.5rem;
@@ -17,7 +17,7 @@
   flex-direction: column;
 }
 
-.text-student-info {
+.text-student-create {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -25,7 +25,7 @@
   color: #333;
 }
 
-.info-row {
+.create-row {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
@@ -33,11 +33,11 @@
   border-bottom: 1px solid #eee;
 }
 
-.info-row:last-child {
+.create-row:last-child {
   border-bottom: none;
 }
 
-.info-row div:first-child {
+.create-row div:first-child {
   font-weight: 500;
   color: #555;
 }
@@ -49,24 +49,24 @@
   gap: 12px;
 }
 
-.editStudent,
+.createStudent,
 .deleteStudent {
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.5rem;
   font-size: 14px;
   transition: all 0.2s ease-in-out;
 }
 
-.editStudent {
-  border: 1px solid #007bff;
-  color: #007bff;
+.createStudent {
+  border: 1px solid #12c912;
+  color: #12c912;
   background: transparent;
 }
 
-.editStudent:hover {
-  background: #007bff;
+.createStudent:hover {
+  background: #12c912;
   color: #fff;
 }
 

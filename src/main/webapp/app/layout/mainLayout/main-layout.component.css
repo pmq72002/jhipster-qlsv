@@ -70,5 +70,5 @@ a {
 .content {
   grid-area: content;
   padding: 20px;
-  background: #fff;
+  background: linear-gradient(135deg, #f0f2f5, #e9f3ff);
 }

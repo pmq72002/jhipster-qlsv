@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login';
 import HomeComponent from './home/home';
 import AuthLayoutComponent from './layout/authLayout/auth-layout.component';
 import MainLayoutComponent from './layout/mainLayout/main-layout.component';
-import { StudentCreateComponent } from './main-menu/studentCreate/studentCreat';
+import { StudentCreateComponent } from './main-menu/studentCreate/studentCreate';
 import { StudentSubject } from './main-menu/studentSubject/studentSubject';
 import { StudentResult } from './main-menu/studentResult/studentResult';
 import { StudentScore } from './main-menu/studentScore/studentScore';
