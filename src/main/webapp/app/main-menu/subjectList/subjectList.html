@@ -1,0 +1,28 @@
+<div class="group-subject-list">
+  <h2>Danh sách môn học</h2>
+  <div class="header-subject-list">
+    <div class="col-1">Mã môn học</div>
+    <div class="col-2">Tên môn học</div>
+    <div class="col-3">Số tiết</div>
+  </div>
+
+  <div class="body-subject-list">
+    @for (subject of allSubjects; track subject) {
+    <div class="row-subject-list">
+      <div class="col-1">{{ subject.subCode }}</div>
+      <div class="col-2">{{ subject.subName}}</div>
+      <div class="col-3">{{ subject.subNum }}</div>
+    </div>
+    }
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="prev()" [disabled]="page === 1">«</button>
+
+    @for (p of pages(); track p) {
+    <button (click)="goTo(p)" [class.active]="page === p">{{ p }}</button>
+    }
+
+    <button (click)="next()" [disabled]="page === totalPages">»</button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { StudentScores } from 'app/shared/types/student-score';
 @Component({
   selector: 'app-student-score',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, NgClass],
   templateUrl: './studentScore.html',
   styleUrl: './studentScore.css',
 })
@@ -62,21 +62,24 @@ export class StudentScore implements OnInit {
   stuName: string = '';
   loadStudentScores(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
-    this.http.get<any>(`api/student/${stuCode}/score`).subscribe({
+    this.http.get<any[]>(`api/student/${stuCode}/subject/summary`).subscribe({
       next: res => {
-        this.studentScore = res.map((item: { subCode: any; subName: any; processPoint: any; componentPoint: any }) => ({
+        this.studentScore = res.map(item => ({
           subCode: item.subCode,
           subName: item.subName,
           processPoint: item.processPoint,
           componentPoint: item.componentPoint,
+          summaryScore: item.summaryScore,
+          passSub: item.passSub,
         }));
+        console.log('✅ studentScore:', this.studentScore);
       },
       error: err => {
         console.error('❌ Lỗi kết nối BE:', err);
         this.error = 'Không thể tải dữ liệu sinh viên';
-        this.loading = false;
       },
     });
+
     this.http.get<any>(`api/student/${stuCode}`).subscribe({
       next: res => {
         this.stuName = res.stuName;

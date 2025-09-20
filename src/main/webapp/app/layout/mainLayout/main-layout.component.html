@@ -28,15 +28,15 @@
       <a [routerLink]="['/studentInfo', stuCode]" routerLinkActive="active" *ngIf="roles.includes('USER')">Thông tin cá nhân</a>
 
       <a
-        [routerLink]="['/studentList']"
+        [routerLink]="['/subject/list']"
         [queryParams]="{ view: 'subject' }"
         routerLinkActive="active"
         (click)="setViewMode('subject')"
         *ngIf="roles.includes('ADMIN')"
       >
-        Môn học
+        Danh sách môn học
       </a>
-
+      <a [routerLink]="['/subject/create']" routerLinkActive="active" *ngIf="roles.includes('ADMIN')">Thêm môn học</a>
       <a
         [routerLink]="['/studentList']"
         [queryParams]="{ view: 'score' }"

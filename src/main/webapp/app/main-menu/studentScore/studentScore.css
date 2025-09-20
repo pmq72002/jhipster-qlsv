@@ -1,87 +1,164 @@
 .group-student-score {
-  width: 35.5%;
-  background: white;
-  border-radius: 4px;
+  width: 60%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
 }
+
 .text-student-score {
-  padding: 2rem 0rem;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 1rem;
 }
+
 .header-student-score {
   display: flex;
-  padding: 1rem;
+  padding: 0.8rem;
   background: #e2e2e2;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
+  border-radius: 6px;
 }
 
-.col-1 {
-  flex: 1;
-  text-align: center;
-}
-
-.col-2 {
-  flex: 1;
-  text-align: center;
-}
-
+.col-1,
+.col-2,
 .col-3 {
   flex: 1;
   text-align: center;
+  font-weight: 500;
 }
+
 .col-4 {
   flex: 1;
   display: flex;
   justify-content: center;
 }
+
 .body-student-score {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 0.8rem;
   margin-top: 1rem;
-  padding: 1rem;
-  font-weight: 500;
-  font-size: 16px;
-  justify-content: center;
 }
 
 .row-student-score {
   display: flex;
   align-items: center;
+  padding: 0.6rem;
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.row-student-score:hover {
+  background: #f9f9f9;
 }
 
 .edit-student-score {
-  background: blue;
-  border-radius: 10px;
-  padding: 0.2rem 0rem;
-  width: 100px;
-  color: white;
+  border: 1px solid #007bff;
+  color: #007bff;
+  background: transparent;
+  border-radius: 6px;
+  text-align: center;
   cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.edit-student-score:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.group-edit-score {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-score-box {
+  width: 50%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.text-edit-score {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
   text-align: center;
 }
 
-a {
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  background: rgb(162, 162, 173);
-  padding: 0.2rem 0.2rem;
-  width: 100px;
-  border-radius: 10px;
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 10px 0;
+  font-size: 18px;
+  gap: 14rem;
 }
 
-.input-score {
-  font-size: 20px;
-  padding: 0.2rem 0.2rem;
+.info-row div:first-child {
+  font-weight: 500;
+  color: #555;
 }
 
-.btn-update-score {
-  background: green;
-  border-radius: 10px;
-  border-width: 0px;
-  padding: 0.6rem 0.4rem;
-  margin-left: 10px;
-  color: white;
+.info-row div {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.info-row input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.actionScore {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.saveScore,
+.cancelScore {
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.saveScore {
+  border: 1px solid #12c912;
+  color: #12c912;
+  background: transparent;
+}
+
+.saveScore:hover {
+  background: #12c912;
+  color: #fff;
+}
+
+.cancelScore {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  background: transparent;
+}
+
+.cancelScore:hover {
+  background: #dc3545;
+  color: #fff;
 }

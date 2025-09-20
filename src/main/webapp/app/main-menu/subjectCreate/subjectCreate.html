@@ -1,0 +1,27 @@
+<div class="group-subject">
+  <div class="group-subject-create">
+    <div class="text-subject-create">
+      <div>Thêm môn học mới</div>
+    </div>
+
+    <form #subjectForm="ngForm" (ngSubmit)="createSubject(subjectForm.value)">
+      <div class="create-row">
+        <div>Mã môn học</div>
+        <input type="text" name="subCode" ngModel required />
+      </div>
+
+      <div class="create-row">
+        <div>Tên môn học</div>
+        <input type="text" name="subName" ngModel required />
+      </div>
+
+      <div class="create-row">
+        <div>Số tiết</div>
+        <input type="number" name="subNum" ngModel />
+      </div>
+      <div class="actionSubject">
+        <button type="submit" class="createSubject">Thêm</button>
+      </div>
+    </form>
+  </div>
+</div>
