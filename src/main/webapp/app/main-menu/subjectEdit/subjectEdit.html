@@ -1,0 +1,27 @@
+<div class="group-subject">
+  <div class="group-subject-edit">
+    <div class="text-subject-edit">
+      <div>Sửa môn học</div>
+    </div>
+
+    <div class="edit-row">
+      <div>Mã môn học</div>
+      <input type="text" [(ngModel)]="subCode" name="subCode" required />
+    </div>
+
+    <div class="edit-row">
+      <div>Tên môn học</div>
+      <input type="text" [(ngModel)]="subName" name="subName" required />
+    </div>
+
+    <div class="edit-row">
+      <div>Số tiết</div>
+      <input type="number" [(ngModel)]="subNum" name="subNum" />
+    </div>
+
+    <div class="actionSubject">
+      <button class="editSubject">Lưu</button>
+      <div class="cancelEdit">Hủy bỏ</div>
+    </div>
+  </div>
+</div>

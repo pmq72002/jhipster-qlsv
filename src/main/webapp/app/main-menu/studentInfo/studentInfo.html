@@ -45,7 +45,7 @@
         </div>
         <div
           class="deleteStudent"
-          *ngIf="!editMode"
+          *ngIf="!editMode && roles.includes('ADMIN')"
           (click)="deleteStudent(studentInfo.stuCode)"
           (keydown.enter)="deleteStudent(studentInfo.stuCode)"
         >

@@ -48,16 +48,43 @@ h2 {
   align-items: center;
 }
 
-a {
+.editBtn {
   display: inline-block;
   text-decoration: none;
-  color: white;
-  background: rgb(162, 162, 173);
-  padding: 0.2rem 0.2rem;
-  width: 130px;
-  height: 35px;
-  border-radius: 10px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #007bff;
+  color: #007bff;
+  background: transparent;
 }
+
+.editBtn:hover {
+  background: #007bff;
+  color: #fff;
+}
+.deleteBtn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  background: transparent;
+}
+
+.deleteBtn:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
 .pagination-controls {
   margin-top: 1rem;
   display: flex;
@@ -81,4 +108,95 @@ a {
 .pagination-controls button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+.group-subject {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  align-items: center;
+  margin: 20px auto;
+  padding: 10px;
+  justify-content: center;
+}
+
+.group-subject-edit {
+  width: 35%;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.text-subject-edit {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.edit-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.edit-row:last-child {
+  border-bottom: none;
+}
+
+.edit-row div:first-child {
+  font-weight: 500;
+  color: #555;
+}
+
+.actionSubject {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 12px;
+}
+
+.editSubject {
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1.5rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #12c912;
+  color: #12c912;
+  background: transparent;
+}
+
+.editSubject:hover {
+  background: #12c912;
+  color: #fff;
+}
+
+.cancelEdit {
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1.5rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  background: transparent;
+}
+
+.cancelEdit:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+.group-action {
+  flex: 1;
+  margin: 20px auto;
 }
