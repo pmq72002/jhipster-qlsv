@@ -22,6 +22,7 @@ export class SubjectListComponent implements OnInit {
   error: string | null = null;
 
   isEdit = false;
+  roles: string[] = [];
 
   @Input() stuCode!: string;
   @Input() isRegister: boolean = false;

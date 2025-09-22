@@ -14,10 +14,12 @@ import { StudentScores } from 'app/shared/types/student-score';
 })
 export class StudentScore implements OnInit {
   selectedSubCode: string | null = null;
+  selectedScore: any = null;
   showEditScore = false;
   handleShowEditScore(score: any): void {
     this.showEditScore = true;
     this.selectedSubCode = score.subCode;
+    this.selectedScore = score;
     this.processPoint = score.processPoint;
     this.componentPoint = score.componentPoint;
     console.log('subCode', this.selectedSubCode);
@@ -29,10 +31,12 @@ export class StudentScore implements OnInit {
   processPoint: number = 0;
   componentPoint: number = 0;
 
+  allStudentScore: StudentScores[] = [];
   studentScore: StudentScores[] = [];
   loading = true;
   error: string | null = null;
-
+  page = 1;
+  size = 5;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -64,7 +68,7 @@ export class StudentScore implements OnInit {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any[]>(`api/student/${stuCode}/subject/summary`).subscribe({
       next: res => {
-        this.studentScore = res.map(item => ({
+        this.allStudentScore = res.map(item => ({
           subCode: item.subCode,
           subName: item.subName,
           processPoint: item.processPoint,
@@ -72,7 +76,9 @@ export class StudentScore implements OnInit {
           summaryScore: item.summaryScore,
           passSub: item.passSub,
         }));
-        console.log('✅ studentScore:', this.studentScore);
+        console.log('✅ studentScore:', this.allStudentScore);
+        this.updatePage();
+        this.loading = false;
       },
       error: err => {
         console.error('❌ Lỗi kết nối BE:', err);
@@ -96,5 +102,37 @@ export class StudentScore implements OnInit {
       this.roles = JSON.parse(storedRoles);
     }
     this.loadStudentScores();
+  }
+
+  updatePage(): void {
+    const start = (this.page - 1) * this.size;
+    this.studentScore = this.allStudentScore.slice(start, start + this.size);
+  }
+
+  goTo(p: number): void {
+    if (p >= 1 && p <= this.totalPages) {
+      this.page = p;
+      this.updatePage();
+    }
+  }
+  prev(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.updatePage();
+    }
+  }
+
+  next(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.updatePage();
+    }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.allStudentScore.length / this.size);
+  }
+  pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

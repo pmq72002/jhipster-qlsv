@@ -162,3 +162,28 @@
   background: #dc3545;
   color: #fff;
 }
+
+.pagination-controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.pagination-controls button {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.pagination-controls button.active {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

@@ -16,13 +16,15 @@
       <div class="col-3">
         <button type="button" class="editBtn" (click)="handleIsEdit(subject)" *ngIf="!isRegister">Sửa</button>
         <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode)" *ngIf="!isRegister">Xóa</button>
-        <button type="button" class="editBtn" (click)="handleRegisterSubject(subject.subCode)">Đăng ký</button>
+        <button type="button" class="editBtn" (click)="handleRegisterSubject(subject.subCode)" *ngIf="roles.includes('USER')">
+          Đăng ký
+        </button>
       </div>
     </div>
     }
   </div>
   <div class="cancelBtn-group">
-    <button type="button" (click)="handleIsRegister()" class="cancelBtn">Hủy bỏ</button>
+    <button type="button" (click)="handleIsRegister()" class="cancelBtn" *ngIf="roles.includes('USER')">Hủy bỏ</button>
   </div>
   <div class="pagination-controls">
     <button (click)="prev()" [disabled]="page === 1">«</button>

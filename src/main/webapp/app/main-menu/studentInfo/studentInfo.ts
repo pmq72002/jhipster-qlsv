@@ -65,6 +65,10 @@ export class StudentInfo implements OnInit {
     });
   }
 
+  handleBackList(): void {
+    this.router.navigate(['/studentList']);
+  }
+
   handleSaveStudent(): void {
     if (!this.studentInfo) return;
     this.http.put<any>(`api/student/${this.studentInfo.stuCode}`, this.studentInfo).subscribe({
