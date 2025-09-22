@@ -39,6 +39,10 @@ export class StudentInfo implements OnInit {
   stuCode: string = '';
 
   ngOnInit(): void {
+    const storedRoles = localStorage.getItem('roles');
+    if (storedRoles) {
+      this.roles = JSON.parse(storedRoles);
+    }
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     if (stuCode) {
       this.loadStudent(stuCode);

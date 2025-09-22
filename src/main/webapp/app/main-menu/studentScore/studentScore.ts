@@ -2,7 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentScores } from 'app/shared/types/student-score';
 
 @Component({
@@ -45,7 +45,14 @@ export class StudentScore implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
+
+  handleBackList(): void {
+    this.router.navigate(['/studentList'], {
+      queryParams: { view: 'score' },
+    });
+  }
 
   onUpdateScore(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');

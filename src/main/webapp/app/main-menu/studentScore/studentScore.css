@@ -159,9 +159,16 @@
   gap: 10px;
   margin-top: 1rem;
 }
+.actionBack {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
 
 .saveScore,
-.cancelScore {
+.cancelScore,
+.cancelScoreList {
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
@@ -181,13 +188,15 @@
   color: #fff;
 }
 
-.cancelScore {
+.cancelScore,
+.cancelScoreList {
   border: 1px solid #dc3545;
   color: #dc3545;
   background: transparent;
 }
 
-.cancelScore:hover {
+.cancelScore:hover,
+.cancelScoreList:hover {
   background: #dc3545;
   color: #fff;
 }

@@ -38,6 +38,11 @@
     </div>
     }
   </div>
+  <div class="actionBack">
+    <div class="cancelScoreList" *ngIf="roles.includes('ADMIN')" (click)="handleBackList()" (keydown.enter)="handleBackList()">
+      Quay lại
+    </div>
+  </div>
 </div>
 <div class="pagination-controls">
   <button (click)="prev()" [disabled]="page === 1">«</button>
