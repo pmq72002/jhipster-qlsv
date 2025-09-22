@@ -6,8 +6,14 @@
         <a [routerLink]="['/home']">QLSV</a>
       </h1>
     </div>
+
     <div class="group-navigation">
-      <div>CHEZ</div>
+      <div class="log-out" (click)="handleIsDropdown()" (keydown)="handleIsDropdown()">
+        CHEZ
+        <div class="dropdown" *ngIf="isDropdown">
+          <button type="button" (click)="logout()">Đăng xuất</button>
+        </div>
+      </div>
     </div>
   </header>
 

@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from 'app/core/auth/authService';
 import { ViewModeService } from 'app/service/ViewModeService';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
@@ -11,11 +12,21 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
   imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf],
 })
 export default class MainLayoutComponent implements OnInit {
-  constructor(private viewModeService: ViewModeService) {}
+  isDropdown = false;
+  handleIsDropdown(): void {
+    this.isDropdown = !this.isDropdown;
+  }
+  constructor(
+    private viewModeService: ViewModeService,
+    private authService: AuthService,
+  ) {}
   setViewMode(mode: 'info' | 'subject' | 'score') {
     this.viewModeService.setViewMode(mode);
   }
 
+  logout() {
+    this.authService.logout();
+  }
   roles: string[] = [];
   stuCode: string = '';
   ngOnInit(): void {

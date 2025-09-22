@@ -23,12 +23,12 @@ export class LoginComponent {
   error: string = '';
 
   constructor(
-    private authService: AuthJwtService,
+    private authJwtService: AuthJwtService,
     private router: Router,
   ) {}
 
   login() {
-    this.authService
+    this.authJwtService
       .login({
         stuCode: this.stuCode,
         password: this.password,

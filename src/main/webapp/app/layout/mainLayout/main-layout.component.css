@@ -72,3 +72,38 @@ a {
   padding: 20px;
   background: linear-gradient(135deg, #f0f2f5, #e9f3ff);
 }
+
+.group-navigation {
+  position: relative;
+}
+.log-out {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 5px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 5px 10px;
+  width: 130px;
+  z-index: 100;
+}
+.dropdown button {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background-color: #f2f2f2;
+}
