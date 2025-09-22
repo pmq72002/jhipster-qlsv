@@ -1,5 +1,5 @@
 .group-student-result {
-  width: 43.9%;
+  width: 45%;
   background: white;
   border-radius: 4px;
 }
@@ -46,13 +46,4 @@
   color: red;
   font-weight: bold;
   font-size: 25;
-}
-a {
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  background: rgb(162, 162, 173);
-  padding: 0.2rem 0.2rem;
-  width: 100px;
-  border-radius: 10px;
 }

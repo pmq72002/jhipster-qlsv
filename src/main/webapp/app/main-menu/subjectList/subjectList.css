@@ -179,7 +179,8 @@ h2 {
   color: #fff;
 }
 
-.cancelEdit {
+.cancelEdit,
+.cancelBtn {
   border-radius: 6px;
   text-align: center;
   cursor: pointer;
@@ -191,7 +192,8 @@ h2 {
   background: transparent;
 }
 
-.cancelEdit:hover {
+.cancelEdit:hover,
+.cancelBtn:hover {
   background: #dc3545;
   color: #fff;
 }
@@ -199,4 +201,9 @@ h2 {
 .group-action {
   flex: 1;
   margin: 20px auto;
+}
+
+.cancelBtn-group {
+  display: flex;
+  justify-content: center;
 }

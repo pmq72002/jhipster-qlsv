@@ -14,13 +14,16 @@
       <div class="col-2">{{ subject.subName}}</div>
       <div class="col-3">{{ subject.subNum }}</div>
       <div class="col-3">
-        <button type="button" class="editBtn" (click)="handleIsEdit(subject)">Sửa</button>
-        <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode)">Xóa</button>
+        <button type="button" class="editBtn" (click)="handleIsEdit(subject)" *ngIf="!isRegister">Sửa</button>
+        <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode)" *ngIf="!isRegister">Xóa</button>
+        <button type="button" class="editBtn" (click)="handleRegisterSubject(subject.subCode)">Đăng ký</button>
       </div>
     </div>
     }
   </div>
-
+  <div class="cancelBtn-group">
+    <button type="button" (click)="handleIsRegister()" class="cancelBtn">Hủy bỏ</button>
+  </div>
   <div class="pagination-controls">
     <button (click)="prev()" [disabled]="page === 1">«</button>
 

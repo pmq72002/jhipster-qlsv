@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubjectLists } from 'app/shared/types/subject-list';
 import { SubjectEditComponent } from '../subjectEdit/subjectEdit';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subject-list',
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class SubjectListComponent implements OnInit {
   editingSubject: SubjectLists | null = null;
+  registerSubject: SubjectLists | null = null;
   allSubjects: SubjectLists[] = [];
   subjects: SubjectLists[] = [];
   loading = true;
@@ -21,15 +23,24 @@ export class SubjectListComponent implements OnInit {
 
   isEdit = false;
 
+  @Input() stuCode!: string;
+  @Input() isRegister: boolean = false;
+  @Output() registered = new EventEmitter<void>();
+
   handleIsEdit(subject: SubjectLists): void {
     this.isEdit = true;
     this.editingSubject = { ...subject };
   }
-
+  handleIsRegister(): void {
+    this.registered.emit();
+  }
   page = 1;
   size = 11;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loadSubject();
@@ -52,6 +63,23 @@ export class SubjectListComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  handleRegisterSubject(subCode: string): void {
+    if (confirm(`Bạn có chắc muốn đăng ký môn: ${subCode}?`)) {
+      this.http.post<any>(`api/student/${this.stuCode}/register/${subCode}`, {}).subscribe({
+        next: res => {
+          this.loadSubject();
+          alert(res.message || '✅ Đăng ký môn học thành công');
+          this.registered.emit();
+        },
+        error: err => {
+          console.error('❌ Lỗi đăng ký môn học', err);
+          const msg = err.error?.message || 'Đăng ký môn học thất bại!';
+          alert('❌ ' + msg);
+        },
+      });
+    }
   }
 
   handleEditSubject(): void {
