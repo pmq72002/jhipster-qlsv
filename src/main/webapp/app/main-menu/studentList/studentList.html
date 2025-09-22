@@ -1,5 +1,8 @@
 <div class="group-student-list">
   <h2>Danh sách sinh viên</h2>
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm sinh viên..." />
+  </div>
   <div class="header-student-list">
     <div class="col-1">STT</div>
     <div class="col-1-header" (click)="sortStudent('stuCode')" (keydown)="sortStudent('stuCode')">Mã SV</div>

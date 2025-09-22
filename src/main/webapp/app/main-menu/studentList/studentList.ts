@@ -1,13 +1,14 @@
 import { NgSwitch, NgSwitchCase } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentLists } from 'app/shared/types/student-list';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [RouterLink, NgSwitch, NgSwitchCase],
+  imports: [RouterLink, NgSwitch, NgSwitchCase, FormsModule],
   templateUrl: './studentList.html',
   styleUrl: './studentList.css',
 })
@@ -17,7 +18,8 @@ export class StudentList implements OnInit {
   students: StudentLists[] = [];
   loading = true;
   error: string | null = null;
-
+  searchTerm: string = '';
+  totalFiltered: number = 0;
   sortField: keyof StudentLists | null = null;
   sortAsc: boolean = true;
 
@@ -40,7 +42,7 @@ export class StudentList implements OnInit {
           stuCode: item.stuCode,
           stuName: item.stuName,
         }));
-        this.updatePage();
+        this.applyFilter();
         this.sortStudent('stuCode');
         this.loading = false;
       },
@@ -52,9 +54,20 @@ export class StudentList implements OnInit {
     });
   }
 
-  updatePage(): void {
+  applyFilter(): void {
+    let filtered = this.allStudents;
+    if (this.searchTerm.trim() != '') {
+      const term = this.searchTerm.toLowerCase();
+      filtered = this.allStudents.filter(sub => sub.stuCode.toLowerCase().includes(term) || sub.stuName.toLowerCase().includes(term));
+    }
+
+    this.totalFiltered = filtered.length;
     const start = (this.page - 1) * this.size;
-    this.students = this.allStudents.slice(start, start + this.size);
+    this.students = filtered.slice(start, start + this.size);
+  }
+
+  updatePage(): void {
+    this.applyFilter();
   }
 
   goTo(p: number): void {
@@ -78,11 +91,12 @@ export class StudentList implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.allStudents.length / this.size);
+    return Math.ceil(this.totalFiltered / this.size);
   }
   pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+
   sortStudent(field: keyof StudentLists): void {
     if (this.sortField === field) {
       this.sortAsc = !this.sortAsc;

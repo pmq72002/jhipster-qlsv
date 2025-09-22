@@ -1,5 +1,9 @@
 <div class="group-subject-list" *ngIf="!isEdit">
   <h2>Danh sách môn học</h2>
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm môn học..." />
+  </div>
+
   <div class="header-subject-list">
     <div class="col-1">STT</div>
     <div class="col-1-header" (click)="sortSubject('subCode')" (keydown)="sortSubject('subCode')">Mã môn học</div>

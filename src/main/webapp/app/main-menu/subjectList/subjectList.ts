@@ -22,7 +22,8 @@ export class SubjectListComponent implements OnInit {
   studentInfo: studentInfo | null = null;
   loading = true;
   error: string | null = null;
-
+  searchTerm: string = '';
+  totalFiltered: number = 0;
   isEdit = false;
   roles: string[] = [];
 
@@ -33,6 +34,7 @@ export class SubjectListComponent implements OnInit {
   @Input() isRegister: boolean = false;
   @Output() registered = new EventEmitter<void>();
 
+  //sort
   sortSubject(field: keyof SubjectLists): void {
     if (this.sortField === field) {
       this.sortAsc = !this.sortAsc;
@@ -79,6 +81,7 @@ export class SubjectListComponent implements OnInit {
     this.loadSubject();
   }
 
+  //load
   loadSubject(): void {
     this.http.get<any>('api/student/subject/list').subscribe({
       next: res => {
@@ -87,7 +90,7 @@ export class SubjectListComponent implements OnInit {
           subName: item.subName,
           subNum: item.subNum,
         }));
-        this.updatePage();
+        this.applyFilter();
         this.sortSubject('subCode');
         this.loading = false;
       },
@@ -99,6 +102,7 @@ export class SubjectListComponent implements OnInit {
     });
   }
 
+  //register
   handleRegisterSubject(subCode: string, subName: string): void {
     if (confirm(`Bạn có chắc muốn đăng ký môn: ${subCode} - ${subName}?`)) {
       this.http.post<any>(`api/student/${this.stuCode}/register/${subCode}`, {}).subscribe({
@@ -116,6 +120,7 @@ export class SubjectListComponent implements OnInit {
     }
   }
 
+  //edit
   handleEditSubject(): void {
     if (!this.editingSubject) return;
     this.http.put<any>(`api/student/subject/${this.editingSubject.subCode}`, this.editingSubject).subscribe({
@@ -137,6 +142,7 @@ export class SubjectListComponent implements OnInit {
     });
   }
 
+  //delete
   deleteSubject(subCode: string): void {
     if (confirm(`Bạn có chắc muốn xóa môn: ${subCode}?`)) {
       this.http.delete<{ message: string }>(`api/student/subject/${subCode}`).subscribe({
@@ -153,9 +159,21 @@ export class SubjectListComponent implements OnInit {
     }
   }
 
-  updatePage(): void {
+  //search
+  applyFilter(): void {
+    let filtered = this.allSubjects;
+    if (this.searchTerm.trim() != '') {
+      const term = this.searchTerm.toLowerCase();
+      filtered = this.allSubjects.filter(sub => sub.subCode.toLowerCase().includes(term) || sub.subName.toLowerCase().includes(term));
+    }
+
+    this.totalFiltered = filtered.length;
     const start = (this.page - 1) * this.size;
-    this.subjects = this.allSubjects.slice(start, start + this.size);
+    this.subjects = filtered.slice(start, start + this.size);
+  }
+
+  updatePage(): void {
+    this.applyFilter();
   }
 
   goTo(p: number): void {
@@ -179,7 +197,7 @@ export class SubjectListComponent implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.allSubjects.length / this.size);
+    return Math.ceil(this.totalFiltered / this.size);
   }
   pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);

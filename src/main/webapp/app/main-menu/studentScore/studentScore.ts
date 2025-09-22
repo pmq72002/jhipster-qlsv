@@ -18,6 +18,8 @@ export class StudentScore implements OnInit {
   showEditScore = false;
   sortField: keyof StudentScores | null = null;
   sortAsc: boolean = true;
+  searchTerm: string = '';
+  totalFiltered: number = 0;
 
   handleShowEditScore(score: any): void {
     this.showEditScore = true;
@@ -80,7 +82,7 @@ export class StudentScore implements OnInit {
           passSub: item.passSub,
         }));
         console.log('✅ studentScore:', this.allStudentScore);
-        this.updatePage();
+        this.applyFilter();
         this.loading = false;
       },
       error: err => {
@@ -107,9 +109,19 @@ export class StudentScore implements OnInit {
     this.loadStudentScores();
   }
 
-  updatePage(): void {
+  applyFilter(): void {
+    let filtered = this.allStudentScore;
+    if (this.searchTerm.trim() != '') {
+      const term = this.searchTerm.toLowerCase();
+      filtered = this.allStudentScore.filter(sub => sub.subCode.toLowerCase().includes(term) || sub.subName.toLowerCase().includes(term));
+    }
+    this.totalFiltered = filtered.length;
     const start = (this.page - 1) * this.size;
-    this.studentScore = this.allStudentScore.slice(start, start + this.size);
+    this.studentScore = filtered.slice(start, start + this.size);
+  }
+
+  updatePage(): void {
+    this.applyFilter();
   }
 
   goTo(p: number): void {
@@ -133,7 +145,7 @@ export class StudentScore implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.allStudentScore.length / this.size);
+    return Math.ceil(this.totalFiltered / this.size);
   }
   pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);

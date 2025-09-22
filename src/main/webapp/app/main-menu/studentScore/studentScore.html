@@ -2,7 +2,9 @@
   <div class="text-student-score">
     <div>Bảng điểm sinh viên: {{stuName}}</div>
   </div>
-
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm môn học..." />
+  </div>
   <div class="header-student-score">
     <div class="col-1">STT</div>
     <div class="col-1-header" (click)="sortScore('subName')" (keydown)="sortScore('subName')">Môn học</div>

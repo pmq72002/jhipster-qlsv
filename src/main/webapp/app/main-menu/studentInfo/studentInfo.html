@@ -43,7 +43,14 @@
         >
           Đổi mật khẩu
         </div>
-        <div class="cancelStudent" *ngIf="!editMode" (click)="handleBackList()" (keydown.enter)="handleBackList()">Quay lại</div>
+        <div
+          class="cancelStudent"
+          *ngIf="!editMode && roles.includes('ADMIN')"
+          (click)="handleBackList()"
+          (keydown.enter)="handleBackList()"
+        >
+          Quay lại
+        </div>
         <div
           class="deleteStudent"
           *ngIf="!editMode && roles.includes('ADMIN')"
