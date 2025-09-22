@@ -20,6 +20,9 @@ export class StudentSubject implements OnInit {
     this.isRegister = true;
   }
 
+  sortField: keyof StudentSubjects | null = null;
+  sortAsc: boolean = true;
+
   allStudentSubjects: StudentSubjects[] = [];
   studentSubjects: StudentSubjects[] = [];
   loading = true;
@@ -45,6 +48,7 @@ export class StudentSubject implements OnInit {
           subNum: item.subNum,
         }));
         this.updatePage();
+        this.sortStudentSubject('subCode');
         this.isRegister = false;
       },
       error: err => {
@@ -92,5 +96,28 @@ export class StudentSubject implements OnInit {
   }
   pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+  sortStudentSubject(field: keyof StudentSubjects): void {
+    if (this.sortField === field) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortField = field;
+      this.sortAsc = true;
+    }
+    this.allStudentSubjects.sort((a, b) => {
+      let valA = a[field];
+      let valB = b[field];
+
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return this.sortAsc ? valA.localeCompare(valB, 'vi', { numeric: true }) : valB.localeCompare(valA, 'vi', { numeric: true });
+      }
+
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        return this.sortAsc ? valA - valB : valB - valA;
+      }
+
+      return 0;
+    });
+    this.updatePage();
   }
 }

@@ -19,6 +19,7 @@ interface jwtPayload {
 export class LoginComponent {
   stuCode: string = '';
   password: string = '';
+  roles: string = '';
   error: string = '';
 
   constructor(
@@ -39,6 +40,7 @@ export class LoginComponent {
           localStorage.setItem('authenticationToken', token);
           localStorage.setItem('stuCode', this.stuCode);
           sessionStorage.setItem('authenticationToken', token);
+
           console.log('✅ Login success:', token);
 
           const decoded = jwtDecode<jwtPayload>(token);

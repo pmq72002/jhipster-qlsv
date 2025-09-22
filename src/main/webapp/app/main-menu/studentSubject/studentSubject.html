@@ -1,26 +1,27 @@
+<div class="actionSubject" *ngIf="!isRegister">
+  <div class="registerSubject" (click)="handleIsRegister()" (keydown)="handleIsRegister()">Đăng ký học</div>
+</div>
 <div class="group-student-subject" *ngIf="!isRegister">
   <div class="text-student-subject">
     <div>Danh sách môn học đã đăng ký</div>
   </div>
   <div class="header-student-subject">
-    <div class="col-1">Mã môn học</div>
-    <div class="col-1">Tên môn học</div>
-    <div class="col-2">Số tiết</div>
+    <div class="col-1">STT</div>
+    <div class="col-1-header" (click)="sortStudentSubject('subCode')" (keydown)="sortStudentSubject('subCode')">Mã môn học</div>
+    <div class="col-2-header" (click)="sortStudentSubject('subName')" (keydown)="sortStudentSubject('subName')">Tên môn học</div>
+    <div class="col-3-header" (click)="sortStudentSubject('subNum')" (keydown)="sortStudentSubject('subNum')">Số tiết</div>
   </div>
 
   <div class="body-student-subject">
-    @for (subject of studentSubjects; track subject) {
+    @for (subject of studentSubjects; track subject; let i = $index) {
     <div class="row-student-subject">
+      <div class="col-1">{{(page-1)*size+i+1}}</div>
       <div class="col-1">{{ subject.subCode}}</div>
-      <div class="col-1">{{ subject.subName }}</div>
-      <div class="col-2">{{ subject.subNum}}</div>
+      <div class="col-2">{{ subject.subName }}</div>
+      <div class="col-3">{{ subject.subNum}}</div>
     </div>
     }
   </div>
-</div>
-
-<div class="actionSubject" *ngIf="!isRegister">
-  <div class="registerSubject" (click)="handleIsRegister()" (keydown)="handleIsRegister()">Đăng ký học</div>
 </div>
 <div class="pagination-controls" *ngIf="!isRegister">
   <button (click)="prev()" [disabled]="page === 1">«</button>

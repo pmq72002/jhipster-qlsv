@@ -4,23 +4,25 @@
   </div>
 
   <div class="header-student-score">
-    <div class="col-1">Môn học</div>
-    <div class="col-2">Điểm QT</div>
-    <div class="col-3">Điểm TP</div>
-    <div class="col-3">Điểm tổng kết</div>
-    <div class="col-3">Kết quả</div>
+    <div class="col-1">STT</div>
+    <div class="col-1-header" (click)="sortScore('subName')" (keydown)="sortScore('subName')">Môn học</div>
+    <div class="col-2-header" (click)="sortScore('processPoint')" (keydown)="sortScore('processPoint')">Điểm QT</div>
+    <div class="col-3-header" (click)="sortScore('componentPoint')" (keydown)="sortScore('componentPoint')">Điểm TP</div>
+    <div class="col-4-header" (click)="sortScore('summaryScore')" (keydown)="sortScore('summaryScore')">Điểm tổng kết</div>
+    <div class="col-5">Kết quả</div>
     <div *ngIf="roles.includes('ADMIN')" class="col-4">ACTION</div>
   </div>
 
   <div class="body-student-score">
-    @for (score of studentScore; track score) {
+    @for (score of studentScore; track score; let i = $index) {
     <div class="row-student-score">
+      <div class="col-1">{{(page - 1)*size + i +1}}</div>
       <div class="col-1">{{ score.subName }}</div>
       <div class="col-2">{{ score.processPoint}}</div>
       <div class="col-3">{{ score.componentPoint}}</div>
-      <div class="col-3">{{ score.summaryScore }}</div>
+      <div class="col-4">{{ score.summaryScore }}</div>
       <div
-        class="col-3"
+        class="col-4"
         [ngClass]="{
               'pass': score.passSub === 'Đỗ',
               'fail': score.passSub === 'Trượt',
@@ -28,7 +30,7 @@
       >
         {{ score.passSub }}
       </div>
-      <div *ngIf="roles.includes('ADMIN')" class="col-4">
+      <div *ngIf="roles.includes('ADMIN')" class="col-5">
         <div class="edit-student-score" (click)="handleShowEditScore(score)" (keydown.enter)="handleShowEditScore(score)">Nhập điểm</div>
       </div>
     </div>

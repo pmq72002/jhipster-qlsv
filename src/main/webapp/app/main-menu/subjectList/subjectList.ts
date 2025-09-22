@@ -5,6 +5,7 @@ import { SubjectEditComponent } from '../subjectEdit/subjectEdit';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { studentInfo } from 'app/shared/types/student-info';
 
 @Component({
   selector: 'app-subject-list',
@@ -18,6 +19,7 @@ export class SubjectListComponent implements OnInit {
   registerSubject: SubjectLists | null = null;
   allSubjects: SubjectLists[] = [];
   subjects: SubjectLists[] = [];
+  studentInfo: studentInfo | null = null;
   loading = true;
   error: string | null = null;
 
@@ -42,12 +44,10 @@ export class SubjectListComponent implements OnInit {
       let valA = a[field];
       let valB = b[field];
 
-      // nếu là chuỗi -> so sánh theo bảng chữ cái
       if (typeof valA === 'string' && typeof valB === 'string') {
         return this.sortAsc ? valA.localeCompare(valB, 'vi', { numeric: true }) : valB.localeCompare(valA, 'vi', { numeric: true });
       }
 
-      // nếu là số -> so sánh số
       if (typeof valA === 'number' && typeof valB === 'number') {
         return this.sortAsc ? valA - valB : valB - valA;
       }
@@ -64,7 +64,7 @@ export class SubjectListComponent implements OnInit {
     this.registered.emit();
   }
   page = 1;
-  size = 11;
+  size = 10;
 
   constructor(
     private http: HttpClient,
@@ -72,6 +72,10 @@ export class SubjectListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const storedRoles = localStorage.getItem('roles');
+    if (storedRoles) {
+      this.roles = JSON.parse(storedRoles);
+    }
     this.loadSubject();
   }
 
@@ -95,8 +99,8 @@ export class SubjectListComponent implements OnInit {
     });
   }
 
-  handleRegisterSubject(subCode: string): void {
-    if (confirm(`Bạn có chắc muốn đăng ký môn: ${subCode}?`)) {
+  handleRegisterSubject(subCode: string, subName: string): void {
+    if (confirm(`Bạn có chắc muốn đăng ký môn: ${subCode} - ${subName}?`)) {
       this.http.post<any>(`api/student/${this.stuCode}/register/${subCode}`, {}).subscribe({
         next: res => {
           this.loadSubject();

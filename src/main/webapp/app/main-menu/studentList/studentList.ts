@@ -18,8 +18,11 @@ export class StudentList implements OnInit {
   loading = true;
   error: string | null = null;
 
+  sortField: keyof StudentLists | null = null;
+  sortAsc: boolean = true;
+
   page = 1;
-  size = 11;
+  size = 10;
 
   constructor(
     private http: HttpClient,
@@ -38,6 +41,7 @@ export class StudentList implements OnInit {
           stuName: item.stuName,
         }));
         this.updatePage();
+        this.sortStudent('stuCode');
         this.loading = false;
       },
       error: err => {
@@ -78,5 +82,28 @@ export class StudentList implements OnInit {
   }
   pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+  sortStudent(field: keyof StudentLists): void {
+    if (this.sortField === field) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortField = field;
+      this.sortAsc = true;
+    }
+    this.allStudents.sort((a, b) => {
+      let valA = a[field];
+      let valB = b[field];
+
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return this.sortAsc ? valA.localeCompare(valB, 'vi', { numeric: true }) : valB.localeCompare(valA, 'vi', { numeric: true });
+      }
+
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        return this.sortAsc ? valA - valB : valB - valA;
+      }
+
+      return 0;
+    });
+    this.updatePage();
   }
 }
