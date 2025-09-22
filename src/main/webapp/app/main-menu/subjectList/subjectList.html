@@ -1,9 +1,9 @@
 <div class="group-subject-list" *ngIf="!isEdit">
   <h2>Danh sách môn học</h2>
   <div class="header-subject-list">
-    <div class="col-1">Mã môn học</div>
-    <div class="col-2">Tên môn học</div>
-    <div class="col-3">Số tiết</div>
+    <div class="col-1" (click)="sortSubject('subCode')" (keydown)="sortSubject('subCode')">Mã môn học</div>
+    <div class="col-2" (click)="sortSubject('subName')" (keydown)="sortSubject('subName')">Tên môn học</div>
+    <div class="col-3" (click)="sortSubject('subNum')" (keydown)="sortSubject('subNum')">Số tiết</div>
     <div class="col-3">Action</div>
   </div>
 

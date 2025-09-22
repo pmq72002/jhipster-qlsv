@@ -20,16 +20,19 @@ h2 {
 .col-1 {
   flex: 1;
   text-align: center;
+  cursor: pointer;
 }
 
 .col-2 {
   flex: 1;
   text-align: center;
+  cursor: pointer;
 }
 
 .col-3 {
   flex: 1;
   text-align: center;
+  cursor: pointer;
 }
 
 .body-subject-list {

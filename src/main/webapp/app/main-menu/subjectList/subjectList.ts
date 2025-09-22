@@ -24,10 +24,38 @@ export class SubjectListComponent implements OnInit {
   isEdit = false;
   roles: string[] = [];
 
+  sortField: keyof SubjectLists | null = null;
+  sortAsc: boolean = true;
+
   @Input() stuCode!: string;
   @Input() isRegister: boolean = false;
   @Output() registered = new EventEmitter<void>();
 
+  sortSubject(field: keyof SubjectLists): void {
+    if (this.sortField === field) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortField = field;
+      this.sortAsc = true;
+    }
+    this.allSubjects.sort((a, b) => {
+      let valA = a[field];
+      let valB = b[field];
+
+      // nếu là chuỗi -> so sánh theo bảng chữ cái
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return this.sortAsc ? valA.localeCompare(valB, 'vi', { numeric: true }) : valB.localeCompare(valA, 'vi', { numeric: true });
+      }
+
+      // nếu là số -> so sánh số
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        return this.sortAsc ? valA - valB : valB - valA;
+      }
+
+      return 0;
+    });
+    this.updatePage();
+  }
   handleIsEdit(subject: SubjectLists): void {
     this.isEdit = true;
     this.editingSubject = { ...subject };
@@ -56,6 +84,7 @@ export class SubjectListComponent implements OnInit {
           subNum: item.subNum,
         }));
         this.updatePage();
+        this.sortSubject('subCode');
         this.loading = false;
       },
       error: err => {
