@@ -23,10 +23,12 @@
   display: flex;
   align-items: center;
 }
+
 .header-show-list {
   font-size: 24px;
   padding-left: 5rem;
 }
+
 .main-menu {
   display: flex;
   justify-content: space-between;
@@ -40,6 +42,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 .sidebar {
   margin-top: 1px;
   grid-area: sidebar;
@@ -76,6 +79,7 @@ a {
 .group-navigation {
   position: relative;
 }
+
 .log-out {
   cursor: pointer;
   position: relative;
@@ -95,6 +99,7 @@ a {
   width: 130px;
   z-index: 100;
 }
+
 .dropdown button {
   background: none;
   border: none;

@@ -5,9 +5,11 @@
   padding: 1rem;
   border-radius: 4px;
 }
+
 h2 {
   text-align: center;
 }
+
 .search-bar {
   display: flex;
   justify-content: flex-end;
@@ -65,6 +67,34 @@ h2 {
   align-items: center;
 }
 
+.registerBtn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #007bff;
+  color: #007bff;
+  background: transparent;
+}
+
+.registerBtn:hover:not(:disabled) {
+  background: #007bff;
+  color: #fff;
+}
+
+.registerBtn:disabled {
+  background-color: #b0b0b0;
+  border: 1px solid #b0b0b0;
+  color: #f5f5f5;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.8;
+}
+
 .editBtn {
   display: inline-block;
   text-decoration: none;
@@ -83,6 +113,7 @@ h2 {
   background: #007bff;
   color: #fff;
 }
+
 .deleteBtn {
   display: inline-block;
   text-decoration: none;

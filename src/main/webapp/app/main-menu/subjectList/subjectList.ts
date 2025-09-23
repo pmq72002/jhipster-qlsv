@@ -49,7 +49,10 @@ export class SubjectListComponent implements OnInit {
       if (typeof valA === 'string' && typeof valB === 'string') {
         return this.sortAsc ? valA.localeCompare(valB, 'vi', { numeric: true }) : valB.localeCompare(valA, 'vi', { numeric: true });
       }
-
+      if (field === 'isRegistered') {
+        valA = a.isRegistered ? 1 : 0;
+        valB = b.isRegistered ? 1 : 0;
+      }
       if (typeof valA === 'number' && typeof valB === 'number') {
         return this.sortAsc ? valA - valB : valB - valA;
       }
@@ -89,10 +92,25 @@ export class SubjectListComponent implements OnInit {
           subCode: item.subCode,
           subName: item.subName,
           subNum: item.subNum,
+          isRegistered: false,
         }));
-        this.applyFilter();
-        this.sortSubject('subCode');
-        this.loading = false;
+
+        this.http.get<any[]>(`api/student/${this.stuCode}/subject`).subscribe({
+          next: registered => {
+            const registeredCodes = registered.map(r => r.subCode);
+
+            this.allSubjects = this.allSubjects.map(s => ({
+              ...s,
+              isRegistered: registeredCodes.includes(s.subCode),
+            }));
+            this.applyFilter();
+            this.sortSubject('subCode');
+            this.loading = false;
+          },
+          error: err => {
+            console.error('❌ Lỗi lấy danh sách môn đã đăng ký:', err);
+          },
+        });
       },
       error: err => {
         console.error('❌ Lỗi kết nối BE:', err);

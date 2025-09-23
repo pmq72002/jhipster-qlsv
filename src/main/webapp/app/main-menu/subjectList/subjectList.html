@@ -9,7 +9,7 @@
     <div class="col-1-header" (click)="sortSubject('subCode')" (keydown)="sortSubject('subCode')">Mã môn học</div>
     <div class="col-2-header" (click)="sortSubject('subName')" (keydown)="sortSubject('subName')">Tên môn học</div>
     <div class="col-3-header" (click)="sortSubject('subNum')" (keydown)="sortSubject('subNum')">Số tiết</div>
-    <div class="col-3">Action</div>
+    <div class="col-3-header" (click)="sortSubject('isRegistered')" (keydown)="sortSubject('isRegistered')">Action</div>
   </div>
 
   <div class="body-subject-list">
@@ -24,11 +24,12 @@
         <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode)" *ngIf="!isRegister">Xóa</button>
         <button
           type="button"
-          class="editBtn"
-          (click)="handleRegisterSubject(subject.subCode,subject.subName)"
-          *ngIf="roles.includes('USER')"
+          [disabled]="subject.isRegistered"
+          class="registerBtn"
+          (click)="!subject.isRegistered &&  handleRegisterSubject(subject.subCode,subject.subName)"
+          *ngIf="roles.includes('USER') "
         >
-          Đăng ký
+          {{ subject.isRegistered ? ' Đã đăng ký' : 'Đăng ký' }}
         </button>
       </div>
     </div>

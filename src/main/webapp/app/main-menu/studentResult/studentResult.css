@@ -3,6 +3,7 @@
   background: white;
   border-radius: 4px;
 }
+
 .header-student-result {
   display: flex;
   padding: 1rem;
@@ -36,6 +37,7 @@
   display: flex;
   align-items: center;
 }
+
 .pass {
   color: green;
   font-size: 25;
