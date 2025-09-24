@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-create',
@@ -26,13 +27,21 @@ export class StudentCreateComponent {
     this.http.post<{ message: string; result: any }>(`api/student/create`, student).subscribe({
       next: res => {
         console.log('Tạo sinh viên thành công: ', res.message);
-        alert(res.message);
+        Swal.fire({
+          icon: 'success',
+          title: 'Thành công',
+          text: res.message || 'Tạo sinh viên thành công',
+          confirmButtonText: 'OK',
+        });
       },
       error: err => {
         console.error('❌ Lỗi tạo sinh viên:', err);
-
-        const msg = err.error?.message || 'Tạo sinh viên thất bại!';
-        alert('❌ ' + msg);
+        Swal.fire({
+          icon: 'error',
+          title: 'Thất bại',
+          html: `Tạo sinh viên thất bại:<br><b>${err.error?.message || ''}<b>`,
+          confirmButtonText: 'Thử lại',
+        });
       },
     });
   }

@@ -26,11 +26,11 @@
       <div
         class="col-4"
         [ngClass]="{
-              'pass': score.passSub === 'Đỗ',
-              'fail': score.passSub === 'Trượt',
+              'pass': score.passStatus === 'Đỗ',
+              'fail': score.passStatus === 'Trượt',
             }"
       >
-        {{ score.passSub }}
+        {{ score.passStatus }}
       </div>
       <div *ngIf="roles.includes('ADMIN')" class="col-5">
         <div class="edit-student-score" (click)="handleShowEditScore(score)" (keydown.enter)="handleShowEditScore(score)">Nhập điểm</div>

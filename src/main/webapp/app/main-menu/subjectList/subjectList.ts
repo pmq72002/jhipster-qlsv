@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { studentInfo } from 'app/shared/types/student-info';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subject-list',
@@ -88,16 +89,16 @@ export class SubjectListComponent implements OnInit {
   loadSubject(): void {
     this.http.get<any>('api/student/subject/list').subscribe({
       next: res => {
-        this.allSubjects = res.map((item: { subCode: any; subName: any; subNum: any }) => ({
+        this.allSubjects = res.result.map((item: { subCode: any; subName: any; subNum: any }) => ({
           subCode: item.subCode,
           subName: item.subName,
           subNum: item.subNum,
           isRegistered: false,
         }));
 
-        this.http.get<any[]>(`api/student/${this.stuCode}/subject`).subscribe({
+        this.http.get<any>(`api/student/${this.stuCode}/subject`).subscribe({
           next: registered => {
-            const registeredCodes = registered.map(r => r.subCode);
+            const registeredCodes = registered.result.map((r: any) => r.subCode);
 
             this.allSubjects = this.allSubjects.map(s => ({
               ...s,
@@ -122,22 +123,41 @@ export class SubjectListComponent implements OnInit {
 
   //register
   handleRegisterSubject(subCode: string, subName: string): void {
-    if (confirm(`Bạn có chắc muốn đăng ký môn: ${subCode} - ${subName}?`)) {
-      this.http.post<any>(`api/student/${this.stuCode}/register/${subCode}`, {}).subscribe({
-        next: res => {
-          this.loadSubject();
-          alert(res.message || '✅ Đăng ký môn học thành công');
-          this.registered.emit();
-        },
-        error: err => {
-          console.error('❌ Lỗi đăng ký môn học', err);
-          const msg = err.error?.message || 'Đăng ký môn học thất bại!';
-          alert('❌ ' + msg);
-        },
-      });
-    }
+    Swal.fire({
+      title: 'Xác nhận đăng ký',
+      html: `Bạn có chắc muốn đăng ký môn: <b>${subCode}<b> - <b>${subName}<b>?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Đăng ký',
+      cancelButtonText: 'Hủy',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.http.post<any>(`api/student/${this.stuCode}/register/${subCode}`, {}).subscribe({
+          next: res => {
+            this.loadSubject();
+            Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              text: res.message || 'Đăng ký môn học thành công',
+              confirmButtonText: 'OK',
+            });
+            this.registered.emit();
+          },
+          error: err => {
+            console.error('❌ Lỗi đăng ký môn học', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Thất bại',
+              html: `Đăng ký môn học thất bại:<br><b>${err.error?.message || ''}<b>`,
+              confirmButtonText: 'Thử lại',
+            });
+          },
+        });
+      }
+    });
   }
-
   //edit
   handleEditSubject(): void {
     if (!this.editingSubject) return;
@@ -151,30 +171,60 @@ export class SubjectListComponent implements OnInit {
         this.loadSubject();
         this.isEdit = false;
         this.editingSubject = null;
-        alert(res.message || 'Cập nhật môn học thành công');
+        Swal.fire({
+          icon: 'success',
+          title: 'Thành công',
+          text: res.message || 'Cập nhật môn học thành công',
+          confirmButtonText: 'OK',
+        });
       },
       error: err => {
         console.log('Lỗi cập nhật', err);
-        alert('Cập nhật thất bại');
+        Swal.fire({
+          icon: 'error',
+          title: 'Thất bại',
+          html: `Cập nhật môn học thất bại:<br><b>${err.error?.message || ''}<b>`,
+          confirmButtonText: 'Thử lại',
+        });
       },
     });
   }
 
   //delete
-  deleteSubject(subCode: string): void {
-    if (confirm(`Bạn có chắc muốn xóa môn: ${subCode}?`)) {
-      this.http.delete<{ message: string }>(`api/student/subject/${subCode}`).subscribe({
-        next: res => {
-          console.log('✅ Xóa thành công:', res.message);
-          alert(res.message);
-          this.loadSubject();
-        },
-        error: err => {
-          console.error('❌ Lỗi xóa môn học:', err);
-          alert('Xóa môn học thất bại!');
-        },
-      });
-    }
+  deleteSubject(subCode: string, subName: string): void {
+    Swal.fire({
+      title: 'Xác nhận xóa',
+      html: `Bạn có chắc muốn xóa môn: <b>${subCode}<b> - <b>${subName}<b>?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then(result => {
+      if (result.isConfirmed)
+        this.http.delete<{ message: string }>(`api/student/subject/${subCode}`).subscribe({
+          next: res => {
+            console.log('✅ Xóa thành công:', res.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              html: `${res.message} <b>${subCode}<b> - <b>${subName}<b>` || 'Xóa môn học thành công',
+              confirmButtonText: 'OK',
+            });
+            this.loadSubject();
+          },
+          error: err => {
+            console.error('❌ Lỗi xóa môn học:', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Thất bại',
+              html: `Xóa môn học thất bại:<br><b>${err.error?.message || ''}<b>`,
+              confirmButtonText: 'Thử lại',
+            });
+          },
+        });
+    });
   }
 
   //search

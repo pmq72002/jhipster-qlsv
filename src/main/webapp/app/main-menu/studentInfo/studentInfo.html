@@ -54,8 +54,8 @@
         <div
           class="deleteStudent"
           *ngIf="!editMode && roles.includes('ADMIN')"
-          (click)="deleteStudent(studentInfo.stuCode)"
-          (keydown.enter)="deleteStudent(studentInfo.stuCode)"
+          (click)="deleteStudent(studentInfo.stuCode, studentInfo.stuName)"
+          (keydown.enter)="deleteStudent(studentInfo.stuCode, studentInfo.stuName)"
         >
           Xóa sinh viên
         </div>

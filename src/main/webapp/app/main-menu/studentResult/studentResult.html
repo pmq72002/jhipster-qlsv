@@ -17,11 +17,11 @@
       <div
         class="col-5"
         [ngClass]="{
-              'pass': result.passSub === 'Đỗ',
-              'fail': result.passSub === 'Trượt',
+              'pass': result.passStatus === 'Đỗ',
+              'fail': result.passStatus === 'Trượt',
             }"
       >
-        {{ result.passSub }}
+        {{ result.passStatus }}
       </div>
     </div>
     }

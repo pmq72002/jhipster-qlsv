@@ -21,7 +21,7 @@
       <div class="col-3">{{ subject.subNum }}</div>
       <div class="col-3">
         <button type="button" class="editBtn" (click)="handleIsEdit(subject)" *ngIf="!isRegister">Sửa</button>
-        <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode)" *ngIf="!isRegister">Xóa</button>
+        <button type="button" class="deleteBtn" (click)="deleteSubject(subject.subCode, subject.subName)" *ngIf="!isRegister">Xóa</button>
         <button
           type="button"
           [disabled]="subject.isRegistered"

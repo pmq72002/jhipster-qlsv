@@ -42,7 +42,7 @@ export class StudentSubject implements OnInit {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any>(`api/student/${stuCode}/subject`).subscribe({
       next: res => {
-        this.allStudentSubjects = res.map((item: { subCode: any; subName: any; subNum: any }) => ({
+        this.allStudentSubjects = res.result.map((item: { subCode: any; subName: any; subNum: any }) => ({
           subCode: item.subCode,
           subName: item.subName,
           subNum: item.subNum,

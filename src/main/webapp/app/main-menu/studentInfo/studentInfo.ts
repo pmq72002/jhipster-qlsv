@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { studentInfo } from 'app/shared/types/student-info';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 interface Student {
   stuCode: string;
@@ -52,13 +53,14 @@ export class StudentInfo implements OnInit {
   loadStudent(stuCode: string): void {
     this.http.get<any>(`api/student/${stuCode}`).subscribe({
       next: res => {
+        const student = res.result;
         this.studentInfo = {
-          stuCode: res.stuCode,
-          stuName: res.stuName,
-          gender: res.gender,
-          birth: res.birth,
-          classR: res.classR,
-          course: res.course,
+          stuCode: student.stuCode,
+          stuName: student.stuName,
+          gender: student.gender,
+          birth: student.birth,
+          classR: student.classR,
+          course: student.course,
         };
       },
       error: err => {
@@ -79,11 +81,21 @@ export class StudentInfo implements OnInit {
       next: res => {
         this.studentInfo = res.result;
         this.editMode = false;
-        alert(res.message || 'Cập nhật thông tin thành công');
+        Swal.fire({
+          icon: 'success',
+          title: 'Thành công',
+          text: res.message || 'Cập nhật thông tin thành công',
+          confirmButtonText: 'OK',
+        });
       },
       error: err => {
         console.log('Lỗi cập nhật', err);
-        alert('Cập nhật thất bại');
+        Swal.fire({
+          icon: 'error',
+          title: 'Thất bại',
+          text: 'Cập nhật thất bại',
+          confirmButtonText: 'Thử lại',
+        });
       },
     });
   }
@@ -94,38 +106,81 @@ export class StudentInfo implements OnInit {
       newPassword: this.newPassword,
       confirmPassword: this.confirmPassword,
     };
-    if (confirm(`Bạn có chắc muốn đổi mật khẩu?`)) {
-      this.http.put<any>(`api/student/${this.studentInfo?.stuCode}/password`, payload).subscribe({
-        next: res => {
-          this.studentInfo = res.result;
-          this.changePassMode = false;
-          alert(res.message || 'Đổi mật khẩu thành công');
-          const stuCode = this.route.snapshot.paramMap.get('stuCode');
-          if (stuCode) {
-            this.loadStudent(stuCode);
-          }
-        },
-        error: err => {
-          console.log('Lỗi đổi mật khẩu', err);
-          alert('Đổi mật khẩu thất bại: ' + err.error?.message);
-        },
-      });
-    }
+    Swal.fire({
+      title: 'Xác nhận đổi mật khẩu',
+      html: `Bạn có chắc muốn đổi mật khẩu?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Có',
+      cancelButtonText: 'Hủy',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.http.put<any>(`api/student/${this.studentInfo?.stuCode}/password`, payload).subscribe({
+          next: res => {
+            this.studentInfo = res.result;
+            this.changePassMode = false;
+            Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              text: res.message || 'Đổi mật khẩu thành công',
+              confirmButtonText: 'OK',
+            });
+            const stuCode = this.route.snapshot.paramMap.get('stuCode');
+            if (stuCode) {
+              this.loadStudent(stuCode);
+            }
+          },
+          error: err => {
+            console.log('Lỗi đổi mật khẩu', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Thất bại',
+              html: `Đổi mật khẩu thất bại:<br><b>${err.error?.message || ''}<b>`,
+              confirmButtonText: 'Thử lại',
+            });
+          },
+        });
+      }
+    });
   }
 
-  deleteStudent(stuCode: string): void {
-    if (confirm(`Bạn có chắc muốn xóa sinh viên ${stuCode}?`)) {
-      this.http.delete<{ message: string }>(`api/student/${stuCode}`).subscribe({
-        next: res => {
-          console.log('✅ Xóa thành công:', res.message);
-          this.router.navigate(['/studentList']);
-          alert(res.message);
-        },
-        error: err => {
-          console.error('❌ Lỗi xóa sinh viên:', err);
-          alert('Xóa sinh viên thất bại!');
-        },
-      });
-    }
+  deleteStudent(stuCode: string, stuName: string): void {
+    Swal.fire({
+      title: 'Xác nhận xóa',
+      html: `Bạn có chắc muốn xóa sinh viên <b>${stuCode}</b> - <b>${stuName}</b>?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.http.delete<{ message: string }>(`api/student/${stuCode}`).subscribe({
+          next: res => {
+            console.log('✅ Xóa thành công:', res.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              html: `${res.message}<b>${stuCode}<b> - <b>${stuName}<b>` || 'Xóa sinh viên thành công',
+              confirmButtonText: 'OK',
+            });
+            this.router.navigate(['/studentList']);
+          },
+          error: err => {
+            console.error('❌ Lỗi xóa sinh viên:', err);
+            console.log('Lỗi đổi mật khẩu', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Thất bại',
+              html: `Xóa sinh viên thất bại:<br><b>${err.error?.message || ''}<b>`,
+              confirmButtonText: 'Thử lại',
+            });
+          },
+        });
+      }
+    });
   }
 }

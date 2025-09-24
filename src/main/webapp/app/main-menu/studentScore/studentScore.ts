@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentScores } from 'app/shared/types/student-score';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-score',
@@ -65,28 +66,38 @@ export class StudentScore implements OnInit {
     this.http.put(`api/student/${stuCode}/score/${this.selectedSubCode}`, newScore).subscribe({
       next: res => {
         console.log('✅ Điểm đã cập nhật:', res);
-        alert('Cập nhật điểm thành công!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Thành công',
+          text: 'Cập nhật điểm thành công',
+          confirmButtonText: 'OK',
+        });
         this.showEditScore = false;
         this.loadStudentScores();
       },
       error: err => {
         console.error('❌ Lỗi cập nhật điểm:', err);
-        alert('Cập nhật điểm thất bại!');
+        Swal.fire({
+          icon: 'error',
+          title: 'Thất bại',
+          html: `Cập nhật điểm thất bại:<br><b>${err.error?.message || ''}<b>`,
+          confirmButtonText: 'Thử lại',
+        });
       },
     });
   }
   stuName: string = '';
   loadStudentScores(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
-    this.http.get<any[]>(`api/student/${stuCode}/subject/summary`).subscribe({
+    this.http.get<any>(`api/student/${stuCode}/subject/summary`).subscribe({
       next: res => {
-        this.allStudentScore = res.map(item => ({
+        this.allStudentScore = res.result.map((item: any) => ({
           subCode: item.subCode,
           subName: item.subName,
           processPoint: item.processPoint,
           componentPoint: item.componentPoint,
           summaryScore: item.summaryScore,
-          passSub: item.passSub,
+          passStatus: item.passStatus,
         }));
         console.log('✅ studentScore:', this.allStudentScore);
         this.applyFilter();

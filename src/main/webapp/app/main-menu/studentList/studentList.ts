@@ -38,7 +38,7 @@ export class StudentList implements OnInit {
 
     this.http.get<any>('api/student/list').subscribe({
       next: res => {
-        this.allStudents = res.map((item: { stuCode: any; stuName: any }) => ({
+        this.allStudents = res.result.map((item: { stuCode: any; stuName: any }) => ({
           stuCode: item.stuCode,
           stuName: item.stuName,
         }));

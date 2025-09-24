@@ -4,5 +4,5 @@ export type StudentScores = {
   processPoint: number;
   componentPoint: number;
   summaryScore: number;
-  passSub: string;
+  passStatus: string;
 };

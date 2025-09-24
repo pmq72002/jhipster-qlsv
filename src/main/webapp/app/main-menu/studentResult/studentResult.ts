@@ -24,13 +24,15 @@ export class StudentResult implements OnInit {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any>(`api/student/${stuCode}/subject/summary`).subscribe({
       next: res => {
-        this.studentScore = res.map((item: { subName: any; processPoint: any; componentPoint: any; summaryScore: any; passSub: any }) => ({
-          subName: item.subName,
-          processPoint: item.processPoint,
-          componentPoint: item.componentPoint,
-          summaryScore: item.summaryScore,
-          passSub: item.passSub,
-        }));
+        this.studentScore = res.map(
+          (item: { subName: any; processPoint: any; componentPoint: any; summaryScore: any; passStatus: any }) => ({
+            subName: item.subName,
+            processPoint: item.processPoint,
+            componentPoint: item.componentPoint,
+            summaryScore: item.summaryScore,
+            passStatus: item.passStatus,
+          }),
+        );
       },
       error: err => {
         console.error('❌ Lỗi kết nối BE:', err);
