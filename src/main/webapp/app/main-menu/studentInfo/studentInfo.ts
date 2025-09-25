@@ -30,6 +30,9 @@ export class StudentInfo implements OnInit {
   oldPassword = '';
   newPassword = '';
   confirmPassword = '';
+  showOldPassword: boolean = false;
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -54,11 +57,17 @@ export class StudentInfo implements OnInit {
     this.http.get<any>(`api/student/${stuCode}`).subscribe({
       next: res => {
         const student = res.result;
+
+        let birthFormatted = '';
+        if (student.birth) {
+          const [day, month, year] = student.birth.split('/');
+          birthFormatted = `${year}-${month}-${day}`;
+        }
         this.studentInfo = {
           stuCode: student.stuCode,
           stuName: student.stuName,
           gender: student.gender,
-          birth: student.birth,
+          birth: birthFormatted,
           classR: student.classR,
           course: student.course,
         };
@@ -77,9 +86,17 @@ export class StudentInfo implements OnInit {
 
   handleSaveStudent(): void {
     if (!this.studentInfo) return;
-    this.http.put<any>(`api/student/${this.studentInfo.stuCode}`, this.studentInfo).subscribe({
+    const student = { ...this.studentInfo };
+    if (student.birth) {
+      const [year, month, day] = student.birth.split('-');
+      student.birth = `${day}/${month}/${year}`;
+    }
+    this.http.put<any>(`api/student/${this.studentInfo.stuCode}`, student).subscribe({
       next: res => {
-        this.studentInfo = res.result;
+        this.studentInfo = {
+          ...res.result,
+          birth: res.result.birth ? res.result.birth.split('/').reverse().join('-') : '',
+        };
         this.editMode = false;
         Swal.fire({
           icon: 'success',
@@ -93,7 +110,7 @@ export class StudentInfo implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Thất bại',
-          text: 'Cập nhật thất bại',
+          text: `Cập nhật thất bại ${err.error?.message || ''}<b>`,
           confirmButtonText: 'Thử lại',
         });
       },

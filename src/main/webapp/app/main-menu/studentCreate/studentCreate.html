@@ -4,7 +4,6 @@
       <div>Tạo sinh viên mới</div>
     </div>
 
-    <!-- Dùng template-driven form -->
     <form #studentForm="ngForm" (ngSubmit)="createStudent(studentForm.value)">
       <div class="create-row">
         <div>Mã sinh viên</div>
@@ -23,7 +22,7 @@
 
       <div class="create-row">
         <div>Ngày sinh</div>
-        <input type="text" name="birth" ngModel />
+        <input type="date" name="birth" ngModel />
       </div>
 
       <div class="create-row">

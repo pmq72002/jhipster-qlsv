@@ -24,6 +24,10 @@ export class StudentCreateComponent {
   constructor(private http: HttpClient) {}
 
   createStudent(student: any): void {
+    if (student.birth) {
+      const [year, month, day] = student.birth.split('-');
+      student.birth = `${day}/${month}/${year}`;
+    }
     this.http.post<{ message: string; result: any }>(`api/student/create`, student).subscribe({
       next: res => {
         console.log('Tạo sinh viên thành công: ', res.message);

@@ -21,7 +21,7 @@ export class LoginComponent {
   password: string = '';
   roles: string = '';
   error: string = '';
-
+  showPassword: boolean = false;
   constructor(
     private authJwtService: AuthJwtService,
     private router: Router,

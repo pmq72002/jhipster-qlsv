@@ -19,7 +19,7 @@
 
       <div class="info-row">
         <div>Ngày sinh</div>
-        <input type="text" [(ngModel)]="studentInfo.birth" [disabled]="!editMode" />
+        <input type="date" [(ngModel)]="studentInfo.birth" [disabled]="!editMode" />
       </div>
 
       <div class="info-row">
@@ -68,15 +68,42 @@
   <div class="group-change-password">
     <div class="info-row">
       <div>Mật khẩu cũ</div>
-      <input type="text" [(ngModel)]="oldPassword" />
+      <div class="password-container">
+        <input [type]="showOldPassword ? 'text':'password'" [(ngModel)]="oldPassword" />
+        <img
+          [src]="showOldPassword ? 'assets/icons/eye.png' : 'assets/icons/eye-slash.png'"
+          alt="show password"
+          (click)="showOldPassword=!showOldPassword"
+          (keydown)="showOldPassword=!showOldPassword"
+          class="eye-icon"
+        />
+      </div>
     </div>
     <div class="info-row">
       <div>Mật khẩu mới</div>
-      <input type="text" [(ngModel)]="newPassword" />
+      <div class="password-container">
+        <input [type]="showNewPassword ? 'text':'password'" [(ngModel)]="newPassword" />
+        <img
+          [src]="showNewPassword ? 'assets/icons/eye.png' : 'assets/icons/eye-slash.png'"
+          alt="show password"
+          (click)="showNewPassword=!showNewPassword"
+          (keydown)="showNewPassword=!showNewPassword"
+          class="eye-icon"
+        />
+      </div>
     </div>
     <div class="info-row">
       <div>Nhập lại mật khẩu</div>
-      <input type="text" [(ngModel)]="confirmPassword" />
+      <div class="password-container">
+        <input [type]="showConfirmPassword ? 'text':'password'" [(ngModel)]="confirmPassword" />
+        <img
+          [src]="showConfirmPassword ? 'assets/icons/eye.png' : 'assets/icons/eye-slash.png'"
+          alt="show password"
+          (click)="showConfirmPassword=!showConfirmPassword"
+          (keydown)="showConfirmPassword=!showConfirmPassword"
+          class="eye-icon"
+        />
+      </div>
     </div>
     <div class="actionPassword">
       <div class="savePassword" (click)="changePassStudent()" (keydown.enter)="changePassStudent()">Lưu</div>

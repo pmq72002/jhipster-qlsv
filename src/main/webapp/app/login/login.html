@@ -2,7 +2,19 @@
   <h2>Đăng nhập</h2>
   <form (ngSubmit)="login()" class="login-form">
     <input type="text" [(ngModel)]="stuCode" name="stuCode" placeholder="Mã sinh viên" required />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Mật khẩu" required />
+
+    <div class="password-container">
+      <input [type]="showPassword ? 'text':'password'" [(ngModel)]="password" name="password" placeholder="Mật khẩu" required />
+
+      <img
+        [src]="showPassword ? 'assets/icons/eye.png' : 'assets/icons/eye-slash.png'"
+        alt="show password"
+        (click)="showPassword=!showPassword"
+        (keydown)="showPassword=!showPassword"
+        class="eye-icon"
+      />
+    </div>
+
     <button type="submit">Login</button>
   </form>
   <div *ngIf="error" class="errorLog">{{ error }}</div>
