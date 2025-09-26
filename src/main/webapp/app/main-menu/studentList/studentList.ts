@@ -120,4 +120,21 @@ export class StudentList implements OnInit {
     });
     this.updatePage();
   }
+
+  exportPdf(): void {
+    this.http.get(`api/student/report/pdf/studentList`, { responseType: 'blob' }).subscribe({
+      next: (res: Blob) => {
+        const url = window.URL.createObjectURL(res);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'studentList.pdf';
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => {
+        console.error('Lỗi khi tải PDF:', err);
+      },
+    });
+  }
 }

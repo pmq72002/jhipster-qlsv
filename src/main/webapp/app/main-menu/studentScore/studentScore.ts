@@ -86,7 +86,7 @@ export class StudentScore implements OnInit {
       },
     });
   }
-  stuName: string = '';
+  stuName: string = 'ab';
   loadStudentScores(): void {
     const stuCode = this.route.snapshot.paramMap.get('stuCode');
     this.http.get<any>(`api/student/${stuCode}/subject/summary`).subscribe({
@@ -111,7 +111,7 @@ export class StudentScore implements OnInit {
 
     this.http.get<any>(`api/student/${stuCode}`).subscribe({
       next: res => {
-        this.stuName = res.stuName;
+        this.stuName = res.result.stuName;
       },
       error: err => {
         console.error('❌ Lỗi tải tên sinh viên:', err);
@@ -191,5 +191,24 @@ export class StudentScore implements OnInit {
       return 0;
     });
     this.updatePage();
+  }
+  exportPdf(): void {
+    const stuCode = this.route.snapshot.paramMap.get('stuCode');
+    if (!stuCode) return;
+
+    this.http.get(`api/student/report/pdf/scoreList/${stuCode}`, { responseType: 'blob' }).subscribe({
+      next: (res: Blob) => {
+        const url = window.URL.createObjectURL(res);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'scoreList.pdf';
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => {
+        console.error('Lỗi khi tải PDF:', err);
+      },
+    });
   }
 }

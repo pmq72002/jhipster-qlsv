@@ -35,3 +35,6 @@
     <button (click)="next()" [disabled]="page === totalPages">»</button>
   </div>
 </div>
+<div class="actionExport" [ngSwitch]="viewMode">
+  <div class="exportPdf" *ngSwitchCase="'info'" (click)="exportPdf()" (keydown)="exportPdf()">Xuất PDF</div>
+</div>
