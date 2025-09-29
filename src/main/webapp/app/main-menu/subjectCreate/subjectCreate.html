@@ -7,18 +7,32 @@
     <form #subjectForm="ngForm" (ngSubmit)="createSubject(subjectForm.value)">
       <div class="create-row">
         <div>Mã môn học</div>
-        <input type="text" name="subCode" ngModel required />
+        <input type="text" name="subCode" ngModel required minlength="4" #subCodeRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="subCodeRef.errors?.['required'] && subCodeRef.touched" class="error-text"> Mã môn học không được để trống </span>
+        <span *ngIf="subCodeRef.errors?.['minlength'] && subCodeRef.touched" class="error-text"> Mã môn học Ít nhất 4 kí tự </span>
       </div>
 
       <div class="create-row">
         <div>Tên môn học</div>
-        <input type="text" name="subName" ngModel required />
+        <input type="text" name="subName" ngModel required #subNameRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="subNameRef.errors?.['required'] && subNameRef.touched" class="error-text"> Tên môn học không được để trống </span>
       </div>
 
       <div class="create-row">
         <div>Số tiết</div>
-        <input type="number" name="subNum" ngModel />
+        <input type="number" name="subNum" ngModel required #subNumRef="ngModel" />
       </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="subNumRef.errors?.['required'] && subNumRef.touched" class="error-text"> Số tiết không được để trống </span>
+      </div>
+
       <div class="actionSubject">
         <button type="submit" class="createSubject">Thêm</button>
       </div>

@@ -1,7 +1,12 @@
 <div class="group-student-list">
   <h2>Danh sách sinh viên</h2>
-  <div class="search-bar">
-    <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm sinh viên..." />
+
+  <div class="actionExport" [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'score'"></div>
+    <div class="exportPdf" *ngSwitchCase="'info'" (click)="exportPdf()" (keydown)="exportPdf()">Xuất PDF</div>
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm sinh viên..." />
+    </div>
   </div>
   <div class="header-student-list">
     <div class="col-1">STT</div>
@@ -28,13 +33,8 @@
   <div class="pagination-controls">
     <button (click)="prev()" [disabled]="page === 1">«</button>
 
-    @for (p of pages(); track p) {
-    <button (click)="goTo(p)" [class.active]="page === p">{{ p }}</button>
-    }
+    <button *ngFor="let p of pages()" [disabled]="p === '...'" [class.active]="p === page" (click)="p !== '...' && goTo(p)">{{ p }}</button>
 
     <button (click)="next()" [disabled]="page === totalPages">»</button>
   </div>
-</div>
-<div class="actionExport" [ngSwitch]="viewMode">
-  <div class="exportPdf" *ngSwitchCase="'info'" (click)="exportPdf()" (keydown)="exportPdf()">Xuất PDF</div>
 </div>

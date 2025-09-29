@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'authToken';
+  private tokenKey = 'authenticationToken';
   private rolesKey = 'roles';
 
   constructor(private router: Router) {}
@@ -26,7 +26,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
-
+  public token: string | null = null;
+  public roles: string[] = [];
   logout() {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.rolesKey);

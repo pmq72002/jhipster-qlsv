@@ -1,5 +1,11 @@
 <div class="group-subject-list" *ngIf="!isEdit">
-  <h2>Danh sách môn học</h2>
+  <div class="text-subject-list">
+    <div>Danh sách môn học</div>
+    <div class="cancelBtn-group">
+      <button type="button" (click)="handleIsRegister()" class="cancelBtn" *ngIf="roles.includes('USER')">Hủy bỏ</button>
+    </div>
+  </div>
+
   <div class="search-bar">
     <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Tìm kiếm môn học..." />
   </div>
@@ -35,9 +41,7 @@
     </div>
     }
   </div>
-  <div class="cancelBtn-group">
-    <button type="button" (click)="handleIsRegister()" class="cancelBtn" *ngIf="roles.includes('USER')">Hủy bỏ</button>
-  </div>
+
   <div class="pagination-controls">
     <button (click)="prev()" [disabled]="page === 1">«</button>
 

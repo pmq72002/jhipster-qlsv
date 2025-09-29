@@ -72,3 +72,10 @@ html {
 .password-container .eye-icon:hover {
   opacity: 1;
 }
+
+.error-text {
+  color: red;
+  min-height: 18px;
+  font-size: 14px;
+  padding-left: 10px;
+}

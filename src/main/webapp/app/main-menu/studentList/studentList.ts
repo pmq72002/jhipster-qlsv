@@ -1,4 +1,4 @@
-import { NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { StudentLists } from 'app/shared/types/student-list';
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [RouterLink, NgSwitch, NgSwitchCase, FormsModule],
+  imports: [RouterLink, NgSwitch, NgSwitchCase, FormsModule, NgIf, NgFor],
   templateUrl: './studentList.html',
   styleUrl: './studentList.css',
 })
@@ -24,7 +24,7 @@ export class StudentList implements OnInit {
   sortAsc: boolean = true;
 
   page = 1;
-  size = 10;
+  size = 5;
 
   constructor(
     private http: HttpClient,
@@ -93,8 +93,34 @@ export class StudentList implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.totalFiltered / this.size);
   }
-  pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  pages(): (number | '...')[] {
+    const total = this.totalPages;
+    const current = this.page;
+    const delta = 1;
+    const range: (number | '...')[] = [];
+
+    if (total <= 6) {
+      for (let i = 1; i <= total; i++) {
+        range.push(i);
+      }
+    } else {
+      range.push(1);
+      if (current > 3) {
+        range.push('...');
+      }
+
+      for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+        range.push(i);
+      }
+
+      if (current < total - 2) {
+        range.push('...');
+      }
+
+      range.push(total);
+    }
+
+    return range;
   }
 
   sortStudent(field: keyof StudentLists): void {

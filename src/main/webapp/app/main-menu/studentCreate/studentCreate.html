@@ -7,37 +7,64 @@
     <form #studentForm="ngForm" (ngSubmit)="createStudent(studentForm.value)">
       <div class="create-row">
         <div>Mã sinh viên</div>
-        <input type="text" name="stuCode" ngModel required />
+        <input type="text" name="stuCode" ngModel required #stuCodeRef="ngModel" minlength="4" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="stuCodeRef.errors?.['required'] && stuCodeRef.touched" class="error-text"> Mã sinh viên không được để trống </span>
+        <span *ngIf="stuCodeRef.errors?.['minlength'] && stuCodeRef.touched" class="error-text"> Mã sinh viên Ít nhất 4 kí tự </span>
       </div>
 
       <div class="create-row">
         <div>Họ và tên</div>
-        <input type="text" name="stuName" ngModel required />
+        <input type="text" name="stuName" ngModel required #stuNameRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="stuNameRef.errors?.['required'] && stuNameRef.touched " class="error-text"> Tên sinh viên không được để trống </span>
       </div>
 
       <div class="create-row">
         <div>Giới tính</div>
-        <input type="text" name="gender" ngModel />
+        <input type="text" name="gender" ngModel required #genderRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="genderRef.errors?.['required'] && genderRef.touched" class="error-text"> Giới tính không được để trống </span>
       </div>
 
       <div class="create-row">
         <div>Ngày sinh</div>
-        <input type="date" name="birth" ngModel />
+        <input type="date" name="birth" ngModel required #birthRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="birthRef.errors?.['required'] && birthRef.touched" class="error-text"> Ngày sinh không được để trống </span>
       </div>
 
       <div class="create-row">
         <div>Lớp</div>
-        <input type="text" name="classR" ngModel />
+        <input type="text" name="classR" ngModel required #classRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="classRef.errors?.['required'] && classRef.touched" class="error-text"> Lớp không được để trống </span>
+      </div>
       <div class="create-row">
         <div>Khóa</div>
-        <input type="text" name="course" ngModel />
+        <input type="text" name="course" ngModel required #courseRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="courseRef.errors?.['required']&& courseRef.touched" class="error-text"> Khóa không được để trống </span>
+      </div>
       <div class="create-row">
         <div>Mật khẩu</div>
-        <input type="password" name="password" ngModel required />
+        <input type="password" name="password" ngModel required #passRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="passRef.errors?.['required'] && passRef.touched" class="error-text"> Mật khẩu không được để trống </span>
       </div>
 
       <div class="actionStudent">

@@ -7,10 +7,31 @@
   margin: 1rem auto;
 }
 
+.actionExport {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.exportPdf {
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  background: transparent;
+}
+
+.exportPdf:hover {
+  background: #dc3545;
+  color: #fff;
+}
 .search-bar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 15px;
 }
 
 .search-bar input {
@@ -25,10 +46,13 @@
 }
 
 .text-student-score {
+  display: flex;
   font-weight: bold;
   font-size: 24px;
   text-align: center;
   margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-student-score {
@@ -175,6 +199,7 @@
   cursor: pointer;
   padding: 0.4rem 1rem;
   font-size: 14px;
+  font-weight: 200;
   transition: all 0.2s ease-in-out;
 }
 
@@ -225,27 +250,4 @@
 .pagination-controls button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-.actionExport {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  gap: 12px;
-}
-
-.exportPdf {
-  border-radius: 6px;
-  text-align: center;
-  cursor: pointer;
-  padding: 0.4rem 1rem;
-  font-size: 14px;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid #dc3545;
-  color: #dc3545;
-  background: transparent;
-}
-
-.exportPdf:hover {
-  background: #dc3545;
-  color: #fff;
 }

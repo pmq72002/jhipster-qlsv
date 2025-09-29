@@ -52,7 +52,20 @@
   font-size: 14px;
   box-sizing: border-box;
 }
+.error-text-row {
+  display: flex;
+  gap: 200px;
+  font-size: 16px;
+}
+.error-text-row:last-child {
+  border-bottom: none;
+}
 
+.error-text-row div:first-child {
+  font-weight: 500;
+  color: #555;
+  min-width: 120px;
+}
 .actionStudent {
   display: flex;
   justify-content: flex-end;
@@ -95,4 +108,10 @@
 .group-action {
   flex: 1;
   margin: 20px auto;
+}
+.error-text {
+  color: red;
+  min-height: 18px;
+  font-size: 12px;
+  padding-left: 10px;
 }
