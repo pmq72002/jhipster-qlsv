@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthJwtService } from 'app/core/auth/auth-jwt.service';
+import { AuthService } from 'app/core/auth/authService';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 interface jwtPayload {
@@ -25,6 +26,7 @@ export class LoginComponent {
   constructor(
     private authJwtService: AuthJwtService,
     private router: Router,
+    private authService: AuthService,
   ) {}
 
   login() {
@@ -37,17 +39,14 @@ export class LoginComponent {
       .subscribe({
         next: res => {
           const token = res.result.token;
-          localStorage.setItem('authenticationToken', token);
-          localStorage.setItem('stuCode', this.stuCode);
-          sessionStorage.setItem('authenticationToken', token);
-
-          console.log('✅ Login success:', token);
-
           const decoded = jwtDecode<jwtPayload>(token);
           if (decoded.scope) {
             const roles = decoded.scope.split(' ');
-            localStorage.setItem('roles', JSON.stringify(roles));
+            this.authService.setSession(token, roles);
           }
+
+          localStorage.setItem('stuCode', this.stuCode);
+          console.log('✅ Login success:', token);
 
           console.log('Decoded token: ', decoded);
           this.error = '';

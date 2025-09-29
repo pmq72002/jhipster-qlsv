@@ -14,27 +14,43 @@
 
       <div class="info-row">
         <div>Họ và tên</div>
-        <input type="text" [(ngModel)]="studentInfo.stuName" [disabled]="!editMode" />
+        <input type="text" [(ngModel)]="studentInfo.stuName" [disabled]="!editMode" ngModel required #stuNameRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="stuNameRef.errors?.['required'] && stuNameRef.touched " class="error-text"> Tên sinh viên không được để trống </span>
+      </div>
       <div class="info-row">
         <div>Giới tính</div>
-        <input type="text" [(ngModel)]="studentInfo.gender" [disabled]="!editMode" />
+        <input type="text" [(ngModel)]="studentInfo.gender" [disabled]="!editMode" ngModel required #genderRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="genderRef.errors?.['required'] && genderRef.touched" class="error-text"> Giới tính không được để trống </span>
+      </div>
       <div class="info-row">
         <div>Ngày sinh</div>
-        <input type="date" [(ngModel)]="studentInfo.birth" [disabled]="!editMode" />
+        <input type="date" [(ngModel)]="studentInfo.birth" [disabled]="!editMode" ngModel required #birthRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="birthRef.errors?.['required'] && birthRef.touched" class="error-text"> Ngày sinh không được để trống </span>
+      </div>
       <div class="info-row">
         <div>Lớp</div>
-        <input type="text" [(ngModel)]="studentInfo.classR" [disabled]="!editMode" />
+        <input type="text" [(ngModel)]="studentInfo.classR" [disabled]="!editMode" ngModel required #classRef="ngModel" />
       </div>
-
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="classRef.errors?.['required'] && classRef.touched" class="error-text"> Lớp không được để trống </span>
+      </div>
       <div class="info-row">
         <div>Khóa</div>
-        <input type="text" [(ngModel)]="studentInfo.course" [disabled]="!editMode" />
+        <input type="text" [(ngModel)]="studentInfo.course" [disabled]="!editMode" ngModel required #courseRef="ngModel" />
+      </div>
+      <div class="error-text-row">
+        <div></div>
+        <span *ngIf="courseRef.errors?.['required']&& courseRef.touched" class="error-text"> Khóa không được để trống </span>
       </div>
       <div class="actionStudent">
         <div class="editStudent" *ngIf="!editMode" (click)="editMode = true" (keydown.enter)="editMode=true">Sửa thông tin</div>
