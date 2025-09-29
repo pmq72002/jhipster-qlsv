@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-student-create',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, NgFor],
   templateUrl: './studentCreate.html',
   styleUrl: './studentCreate.css',
 })
@@ -21,7 +21,8 @@ export class StudentCreateComponent {
     course: '',
     password: '',
   };
-
+  classList: string[] = ['CT5A', 'CT5B', 'CT5C', 'CT5D', 'CT6A', 'CT6B', 'CT6C', 'CT6D', 'CT7A', 'CT7B', 'CT7C', 'CT7D'];
+  courseList: string[] = ['CT5', 'CT6', 'CT7'];
   constructor(private http: HttpClient) {}
 
   createStudent(student: any): void {

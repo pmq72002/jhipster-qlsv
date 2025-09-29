@@ -38,7 +38,10 @@
       </div>
       <div class="info-row">
         <div>Lớp</div>
-        <input type="text" [(ngModel)]="studentInfo.classR" [disabled]="!editMode" ngModel required #classRef="ngModel" />
+        <select name="classR" [(ngModel)]="studentInfo.classR" [disabled]="!editMode" required #classRef="ngModel">
+          <option value="" disabled>-- Chọn lớp --</option>
+          <option *ngFor="let cls of classList" [value]="cls">{{ cls }}</option>
+        </select>
       </div>
       <div class="error-text-row">
         <div></div>
@@ -46,7 +49,10 @@
       </div>
       <div class="info-row">
         <div>Khóa</div>
-        <input type="text" [(ngModel)]="studentInfo.course" [disabled]="!editMode" ngModel required #courseRef="ngModel" />
+        <select name="course" [(ngModel)]="studentInfo.course" [disabled]="!editMode" ngModel required #courseRef="ngModel">
+          <option value="" disabled selected>-- Chọn khóa --</option>
+          <option *ngFor="let course of courseList" [value]="course">{{ course }}</option>
+        </select>
       </div>
       <div class="error-text-row">
         <div></div>

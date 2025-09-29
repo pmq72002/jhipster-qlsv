@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,15 +17,17 @@ interface Student {
 @Component({
   selector: 'app-student-info',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [NgIf, FormsModule, NgFor],
   templateUrl: './studentInfo.html',
   styleUrl: './studentInfo.css',
 })
 export class StudentInfo implements OnInit {
+  [x: string]: any;
   studentInfo: studentInfo | null = null;
   loading = true;
   error: string | null = null;
   editMode: boolean = false;
+  visible: boolean = false;
   changePassMode: boolean = false;
   oldPassword = '';
   newPassword = '';
@@ -33,7 +35,8 @@ export class StudentInfo implements OnInit {
   showOldPassword: boolean = false;
   showNewPassword: boolean = false;
   showConfirmPassword: boolean = false;
-
+  classList: string[] = ['CT5A', 'CT5B', 'CT5C', 'CT5D', 'CT6A', 'CT6B', 'CT6C', 'CT6D', 'CT7A', 'CT7B', 'CT7C', 'CT7D'];
+  courseList: string[] = ['CT5', 'CT6', 'CT7'];
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,

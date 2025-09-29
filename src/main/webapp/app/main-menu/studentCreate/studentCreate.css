@@ -52,6 +52,14 @@
   font-size: 14px;
   box-sizing: border-box;
 }
+.create-row select {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #707070;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
 .error-text-row {
   display: flex;
   gap: 200px;

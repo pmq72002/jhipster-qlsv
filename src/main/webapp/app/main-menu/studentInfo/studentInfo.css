@@ -55,6 +55,22 @@
   font-size: 14px;
   box-sizing: border-box;
 }
+.info-row select {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #707070;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+select[disabled] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
 .actionStudent {
   display: flex;
   justify-content: space-between;
