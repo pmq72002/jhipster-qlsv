@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgFor, NgSwitch, NgSwitchCase } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { StudentLists } from 'app/shared/types/student-list';
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [RouterLink, NgSwitch, NgSwitchCase, FormsModule, NgIf, NgFor],
+  imports: [RouterLink, NgSwitch, NgSwitchCase, FormsModule, NgFor],
   templateUrl: './studentList.html',
   styleUrl: './studentList.css',
 })

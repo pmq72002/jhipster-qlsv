@@ -226,12 +226,23 @@
   background: #dc3545;
   color: #fff;
 }
+.pagination-wrapper {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.showTotalPage {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 300;
+}
 
 .pagination-controls {
-  margin-top: 1rem;
   display: flex;
-  gap: 6px;
   justify-content: center;
+  gap: 6px;
 }
 
 .pagination-controls button {

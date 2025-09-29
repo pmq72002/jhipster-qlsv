@@ -48,16 +48,20 @@
     </div>
     }
   </div>
-</div>
-<div class="pagination-controls">
-  <button (click)="prev()" [disabled]="page === 1">«</button>
+  <div class="pagination-wrapper">
+    <div class="showTotalPage">Tổng số trang: {{totalPages}}</div>
+    <div class="pagination-controls">
+      <button (click)="prev()" [disabled]="page === 1">«</button>
 
-  @for (p of pages(); track p) {
-  <button (click)="goTo(p)" [class.active]="page === p">{{ p }}</button>
-  }
+      <button *ngFor="let p of pages()" [disabled]="p === '...'" [class.active]="p === page" (click)="p !== '...' && goTo(p)">
+        {{ p }}
+      </button>
 
-  <button (click)="next()" [disabled]="page === totalPages">»</button>
+      <button (click)="next()" [disabled]="page === totalPages">»</button>
+    </div>
+  </div>
 </div>
+
 <div class="group-edit-score" *ngIf="showEditScore">
   <div class="edit-score-box">
     <div class="text-edit-score">Nhập điểm</div>

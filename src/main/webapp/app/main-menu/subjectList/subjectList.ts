@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubjectLists } from 'app/shared/types/subject-list';
 import { SubjectEditComponent } from '../subjectEdit/subjectEdit';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { studentInfo } from 'app/shared/types/student-info';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-subject-list',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, NgFor],
   templateUrl: './subjectList.html',
   styleUrl: './subjectList.css',
 })
@@ -70,7 +70,7 @@ export class SubjectListComponent implements OnInit {
     this.registered.emit();
   }
   page = 1;
-  size = 10;
+  size = 5;
 
   constructor(
     private http: HttpClient,
@@ -267,7 +267,33 @@ export class SubjectListComponent implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.totalFiltered / this.size);
   }
-  pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  pages(): (number | '...')[] {
+    const total = this.totalPages;
+    const current = this.page;
+    const delta = 1;
+    const range: (number | '...')[] = [];
+
+    if (total <= 6) {
+      for (let i = 1; i <= total; i++) {
+        range.push(i);
+      }
+    } else {
+      range.push(1);
+      if (current > 3) {
+        range.push('...');
+      }
+
+      for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+        range.push(i);
+      }
+
+      if (current < total - 2) {
+        range.push('...');
+      }
+
+      range.push(total);
+    }
+
+    return range;
   }
 }

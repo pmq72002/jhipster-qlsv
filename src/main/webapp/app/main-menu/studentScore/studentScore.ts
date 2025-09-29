@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-student-score',
   standalone: true,
-  imports: [FormsModule, NgIf, NgClass],
+  imports: [FormsModule, NgIf, NgClass, NgFor],
   templateUrl: './studentScore.html',
   styleUrl: './studentScore.css',
 })
@@ -42,7 +42,7 @@ export class StudentScore implements OnInit {
   loading = true;
   error: string | null = null;
   page = 1;
-  size = 10;
+  size = 5;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -165,8 +165,34 @@ export class StudentScore implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.totalFiltered / this.size);
   }
-  pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  pages(): (number | '...')[] {
+    const total = this.totalPages;
+    const current = this.page;
+    const delta = 1;
+    const range: (number | '...')[] = [];
+
+    if (total <= 6) {
+      for (let i = 1; i <= total; i++) {
+        range.push(i);
+      }
+    } else {
+      range.push(1);
+      if (current > 3) {
+        range.push('...');
+      }
+
+      for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+        range.push(i);
+      }
+
+      if (current < total - 2) {
+        range.push('...');
+      }
+
+      range.push(total);
+    }
+
+    return range;
   }
 
   sortScore(field: keyof StudentScores): void {
