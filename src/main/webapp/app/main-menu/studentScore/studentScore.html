@@ -1,4 +1,4 @@
-<div class="group-student-score">
+<div class="group-student-score" *ngIf="!showEditScore">
   <div class="text-student-score">
     <div>Bảng điểm sinh viên: {{stuName}}</div>
     <div class="actionBack">
@@ -17,6 +17,7 @@
 
   <div class="header-student-score">
     <div class="col-1">STT</div>
+    <div class="col-2-header" (click)="sortScore('subCode')" (keydown)="sortScore('subCode')">Mã môn học</div>
     <div class="col-1-header" (click)="sortScore('subName')" (keydown)="sortScore('subName')">Môn học</div>
     <div class="col-2-header" (click)="sortScore('processPoint')" (keydown)="sortScore('processPoint')">Điểm QT</div>
     <div class="col-3-header" (click)="sortScore('componentPoint')" (keydown)="sortScore('componentPoint')">Điểm TP</div>
@@ -29,6 +30,7 @@
     @for (score of studentScore; track score; let i = $index) {
     <div class="row-student-score">
       <div class="col-1">{{(page - 1)*size + i +1}}</div>
+      <div class="col-1">{{score.subCode}}</div>
       <div class="col-1">{{ score.subName }}</div>
       <div class="col-2">{{ score.processPoint}}</div>
       <div class="col-3">{{ score.componentPoint}}</div>

@@ -54,32 +54,31 @@
       <button (click)="next()" [disabled]="page === totalPages">»</button>
     </div>
   </div>
+</div>
+<div class="group-subject" *ngIf="isEdit && editingSubject">
+  <div class="group-subject-edit">
+    <div class="text-subject-edit">
+      <div>Sửa môn học</div>
+    </div>
 
-  <div class="group-subject" *ngIf="isEdit && editingSubject">
-    <div class="group-subject-edit">
-      <div class="text-subject-edit">
-        <div>Sửa môn học</div>
-      </div>
+    <div class="edit-row">
+      <div>Mã môn học</div>
+      <input type="text" [(ngModel)]="editingSubject.subCode" name="subCode" disabled />
+    </div>
 
-      <div class="edit-row">
-        <div>Mã môn học</div>
-        <input type="text" [(ngModel)]="editingSubject.subCode" name="subCode" disabled />
-      </div>
+    <div class="edit-row">
+      <div>Tên môn học</div>
+      <input type="text" [(ngModel)]="editingSubject.subName" name="subName" required />
+    </div>
 
-      <div class="edit-row">
-        <div>Tên môn học</div>
-        <input type="text" [(ngModel)]="editingSubject.subName" name="subName" required />
-      </div>
+    <div class="edit-row">
+      <div>Số tiết</div>
+      <input type="number" [(ngModel)]="editingSubject.subNum" name="subNum" />
+    </div>
 
-      <div class="edit-row">
-        <div>Số tiết</div>
-        <input type="number" [(ngModel)]="editingSubject.subNum" name="subNum" />
-      </div>
-
-      <div class="actionSubject">
-        <button class="editSubject" (click)="handleEditSubject()">Lưu</button>
-        <button class="cancelEdit" (click)="isEdit=false">Hủy bỏ</button>
-      </div>
+    <div class="actionSubject">
+      <button class="editSubject" (click)="handleEditSubject()">Lưu</button>
+      <button class="cancelEdit" (click)="isEdit=false">Hủy bỏ</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="group-student">
+<div class="group-student" *ngIf="!changePassMode">
   <div class="group-student-info">
     <div class="text-student-info">
       <div>Thông tin cá nhân</div>
@@ -86,6 +86,9 @@
 
 <div class="group-change-password-container" *ngIf="changePassMode">
   <div class="group-change-password">
+    <div class="text-student-info">
+      <div>Đổi mật khẩu</div>
+    </div>
     <div class="info-row">
       <div>Mật khẩu cũ</div>
       <div class="password-container">
