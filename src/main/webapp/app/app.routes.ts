@@ -7,7 +7,6 @@ import AuthLayoutComponent from './layout/authLayout/auth-layout.component';
 import MainLayoutComponent from './layout/mainLayout/main-layout.component';
 import { StudentCreateComponent } from './main-menu/studentCreate/studentCreate';
 import { StudentSubject } from './main-menu/studentSubject/studentSubject';
-import { StudentResult } from './main-menu/studentResult/studentResult';
 import { StudentScore } from './main-menu/studentScore/studentScore';
 import { SubjectListComponent } from './main-menu/subjectList/subjectList';
 import { SubjectCreateComponent } from './main-menu/subjectCreate/subjectCreate';
@@ -59,10 +58,6 @@ const routes: Routes = [
       {
         path: ':stuCode/score',
         component: StudentScore,
-      },
-      {
-        path: ':stuCode/result',
-        component: StudentResult,
       },
       {
         path: 'subject/list',

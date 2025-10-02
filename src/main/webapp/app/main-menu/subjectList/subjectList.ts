@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubjectLists } from 'app/shared/types/subject-list';
-import { SubjectEditComponent } from '../subjectEdit/subjectEdit';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
